@@ -1,87 +1,99 @@
-﻿
+﻿// Show a welcome message and a menu to the user
 
-//// If the password length is correct, generate a password
+Console.WriteLine("PowerpuffGirls Hesap Makinesine Hos Geldiniz!!!");
 
-//// Message to the User => Welcome to the Password Generator
-//Console.WriteLine("Powerpuff Girls Sifre Ureticisine Hos Geldiniz!");
+// Select the operation
 
-//// Ask user to enter the length of the password
-//Console.WriteLine("Lutfen sifrenizde istediginiz karakter uzunlugunu yazar misiniz?");
+string operationText = ReadOperationTypeFromTheUser();
 
+int operationType = 0;
 
-//// Read the entered value
-//string passwordLengthText = Console.ReadLine();
-
-//// Convert the entered value to integer
-//int passwordLength = Convert.ToInt32(passwordLengthText);
-
-//// Check whether the entered value between 6 and 25
-
-//bool isPasswordLengthAcceptable = false;
-
-//while (isPasswordLengthAcceptable == false)
-//{
-//    if (passwordLength < 6 || passwordLength > 25)
-//    {
-//        Console.WriteLine("The password length you've entered is not acceptable.");
-
-//        // Ask user to enter the length of the password
-//        Console.WriteLine("Lutfen sifrenizde istediginiz karakter uzunlugunu yazar misiniz?");
-
-
-//        // Read the entered value
-//        passwordLengthText = Console.ReadLine();
-
-//        // Convert the entered value to integer
-//        passwordLength = Convert.ToInt32(passwordLengthText);
-
-//        if (passwordLength < 6 || passwordLength > 25)
-//        {
-//            continue;
-//        }
-
-//    }
-
-//    isPasswordLengthAcceptable = true;
-//}
-
-
-
-//// Generate a password
-
-//Random random = new Random();
-
-//string password = "";
-
-//for (int i = 0; i < passwordLength; i++)
-//{
-//    int randomNumber = random.Next(0, 10);
-
-//    password += randomNumber;
-//}
-
-//Console.WriteLine($"Sifreniz:{password}");
-
-SayHello("Alper");
-
-
-void SayHello(string name)
+while (!int.TryParse(operationText, out operationType))
 {
-    Console.WriteLine($"Merhaba {name}!");
-    Console.WriteLine($"Merhaba {name}!");
-    Console.WriteLine($"Merhaba {name}!");
+    operationText = ReadOperationTypeFromTheUser();
 }
 
-int result = Sum(12, 13);
+// Read the numbers from the user
+// Read the number 1 from the user
+string number1Text = ReadNumberFromTheUser(true);
 
-Console.WriteLine(result);
+int number1 = 0;
 
-int Sum(int number1, int number2)
+while (!int.TryParse(number1Text, out number1))
 {
-    int total = number1 + number2;
+    number1Text = ReadNumberFromTheUser(true);
+}
 
-    //Console.WriteLine(total);
+// Read the number 2 from the user
+string number2Text = ReadNumberFromTheUser(false);
 
-    return total;
+int number2 = 0;
+
+while (!int.TryParse(number2Text, out number2))
+{
+    number2Text = ReadNumberFromTheUser(false);
+}
+
+
+
+//// Check the operation type
+//// Sum / Toplama
+//if (operationType == 1)
+//{
+//    int number1 = Convert.ToInt32(Console.ReadLine());
+//    int number2 = Convert.ToInt32(Console.ReadLine());
+//}
+//// Subtract / Cikarma
+//else if (operationType == 2)
+//{
+//    int number1 = Convert.ToInt32(Console.ReadLine());
+//    int number2 = Convert.ToInt32(Console.ReadLine());
+//}
+//// Multiply / Carpma
+//else if (operationType == 3)
+//{
+//    int number1 = Convert.ToInt32(Console.ReadLine());
+//    int number2 = Convert.ToInt32(Console.ReadLine());
+//}
+//// Divide / Bolme
+//else if (operationType == 4)
+//{
+//    int number1 = Convert.ToInt32(Console.ReadLine());
+//    int number2 = Convert.ToInt32(Console.ReadLine());
+//}
+
+
+Console.WriteLine($"Operasyon basariyla alindi. {operationType}");
+
+Console.ReadKey();
+
+string ReadOperationTypeFromTheUser()
+{
+    Console.WriteLine("1-) Toplama");
+    Console.WriteLine("2-) Cikarma");
+    Console.WriteLine("3-) Carpma");
+    Console.WriteLine("4-) Bolme");
+    Console.WriteLine("5-) Hicbiri");
+
+    // Read the operation from the user
+    string operationText = Console.ReadLine();
+
+    return operationText;
+}
+
+string ReadNumberFromTheUser(bool isFirstNumber)
+{
+    if (isFirstNumber)
+    {
+        Console.WriteLine("Lutfen ilk sayiyi giriniz:");
+    }
+    else
+    {
+        Console.WriteLine("Lutfen ikinci sayiyi giriniz:");
+    }
+
+    string numberText = Console.ReadLine();
+
+    return numberText;
 }
 
