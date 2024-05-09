@@ -1,64 +1,30 @@
 ﻿
-// KDV hesaplayan Uygulama Projesi
+using MextFSBeginner.ConsoleClient;
 
-Console.WriteLine("Shady Muhasebe Hizmetlerine Hos Geldiniz. Shady her zaman yaninizda! :)");
+Console.WriteLine("Ilk Hesap Makinesi icin bir isim giriniz:");
 
-// Bir tane deger alanmasi gerekiyor
+var toplamaMakinesi = new Calculator(Console.ReadLine());
 
-double price = ReadPrice();
+toplamaMakinesi.HosGeldinizMesajiGoster();
 
-// Bir tane KDV degeri alinmasi gerekiyor
+toplamaMakinesi.Sayi1iAta();
 
-double taxRate = ReadTaxRate();
+toplamaMakinesi.Sayi2yiAta();
 
-// KDV'li fiyatin hesaplanmasi gerekiyor
+toplamaMakinesi.ToplamaIslemi();
 
-double taxIncludedPrice = CalculateTax(price, taxRate);
+var cikarmaMakinesi = new Calculator("Cikarma");
 
-Console.WriteLine($"------------------------------------");
-Console.WriteLine($"--S----H----A-----D---Y----");
-Console.WriteLine($"------------------------------------");
+cikarmaMakinesi.HosGeldinizMesajiGoster();
 
-Console.WriteLine($"KDV'li Fiyat: {taxIncludedPrice}");
+cikarmaMakinesi.Sayi1iAta();
 
-Console.ReadKey();
+cikarmaMakinesi.Sayi2yiAta();
 
-// CalculateTax()
+cikarmaMakinesi.CikarmaIslemi();
 
-double CalculateTax(double price, double taxRate)
-{
-    double result = price + (price * taxRate / 100);
+Console.WriteLine($"Toplama Makinesinin Result Degeri:{toplamaMakinesi.Result} / Cikarma Makinesinin Result Degeri:{cikarmaMakinesi.Result}");
 
-    return result;
-}
+var carpmaMakinesi = new Calculator("Carpma");
 
-double SumThreeNumbers(double number1, double number2, double number3)
-{
-    double result = number1 + number2 + number3;
-
-    return result;
-}
-
-double ReadPrice()
-{
-    Console.Write("Lutfen bir deger giriniz: ");
-
-    double price = Convert.ToDouble(Console.ReadLine());
-
-    return price;
-}
-
-double ReadTaxRate()
-{
-    Console.WriteLine($"------------------------------------");
-
-    Console.WriteLine($"------------------------------------");
-
-    Console.Write("Lutfen bir KDV degeri giriniz.");
-
-    double taxRate = Convert.ToInt32(Console.ReadLine());
-
-    return taxRate;
-}
-
-
+carpmaMakinesi.HosGeldinizMesajiGoster();
