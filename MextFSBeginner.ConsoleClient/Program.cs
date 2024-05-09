@@ -1,42 +1,64 @@
-﻿using MextFSBeginner.ConsoleClient.Enums;
+﻿
+// KDV hesaplayan Uygulama Projesi
 
-Console.WriteLine("Konsol uygulamamizin rengini degistirmek icin bir renk kodu seciniz.");
+Console.WriteLine("Shady Muhasebe Hizmetlerine Hos Geldiniz. Shady her zaman yaninizda! :)");
 
-foreach(var color in Enum.GetValues(typeof(Colour)))
-{
-    Console.WriteLine($"{(int)color} - {color}");
-}
+// Bir tane deger alanmasi gerekiyor
 
-string coluorText = Console.ReadLine();
+double price = ReadPrice();
 
-Colour selectedColour = Enum.Parse<Colour>(coluorText);
+// Bir tane KDV degeri alinmasi gerekiyor
 
-if (selectedColour == Colour.White)
-{
-    Console.ForegroundColor = ConsoleColor.White;
-}
-else if (selectedColour == Colour.Pink)
-{
-    Console.ForegroundColor = ConsoleColor.Magenta;
-}
-else if (selectedColour == Colour.Blue)
-{
-    Console.ForegroundColor = ConsoleColor.Blue;
-}
-else if (selectedColour == Colour.Red)
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-}
-else if (selectedColour == Colour.Green)
-{
-    Console.ForegroundColor = ConsoleColor.Green;
-}
-else if (selectedColour == Colour.Yellow)
-{
-    Console.ForegroundColor = ConsoleColor.Yellow;
-}
+double taxRate = ReadTaxRate();
 
-Console.WriteLine("Supersin, bak renkler degisti. Ne guzel oldu. :)");
+// KDV'li fiyatin hesaplanmasi gerekiyor
+
+double taxIncludedPrice = CalculateTax(price, taxRate);
+
+Console.WriteLine($"------------------------------------");
+Console.WriteLine($"--S----H----A-----D---Y----");
+Console.WriteLine($"------------------------------------");
+
+Console.WriteLine($"KDV'li Fiyat: {taxIncludedPrice}");
 
 Console.ReadKey();
+
+// CalculateTax()
+
+double CalculateTax(double price, double taxRate)
+{
+    double result = price + (price * taxRate / 100);
+
+    return result;
+}
+
+double SumThreeNumbers(double number1, double number2, double number3)
+{
+    double result = number1 + number2 + number3;
+
+    return result;
+}
+
+double ReadPrice()
+{
+    Console.Write("Lutfen bir deger giriniz: ");
+
+    double price = Convert.ToDouble(Console.ReadLine());
+
+    return price;
+}
+
+double ReadTaxRate()
+{
+    Console.WriteLine($"------------------------------------");
+
+    Console.WriteLine($"------------------------------------");
+
+    Console.Write("Lutfen bir KDV degeri giriniz.");
+
+    double taxRate = Convert.ToInt32(Console.ReadLine());
+
+    return taxRate;
+}
+
 
