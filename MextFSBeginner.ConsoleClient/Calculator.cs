@@ -1,57 +1,57 @@
 ﻿namespace MextFSBeginner.ConsoleClient
 {
-    public class HesapMakinesi
+    public class Calculator
     {
-        private int Sayi1 { get; set; }
-        private int Sayi2 { get; set; }
-        public int Toplam { get; set; }
-        public string Isim { get; set; }
+        private int Number1 { get; set; }
+        private int Number2 { get; set; }
+        public int Result { get; set; }
+        public string Name { get; set; }
 
-        public HesapMakinesi(string isim)
+        public Calculator(string name)
         {
-            Isim = isim;
+            Name = name;
         }
 
         public int ToplamaIslemi()
         {
-            Toplam = Sayi1 + Sayi2;
+            Result = Number1 + Number2;
 
             SonucuYazdir("Toplama");
 
-            return Toplam;
+            return Result;
         }
 
         public int CikarmaIslemi()
         {
-            Toplam = Sayi1 - Sayi2;
+            Result = Number1 - Number2;
 
             SonucuYazdir("Cikarma");
 
-            return Toplam;
+            return Result;
         }
 
         private void SonucuYazdir(string islemTipi)
         {
-            Console.WriteLine($"{islemTipi} Islemi Toplam: {Toplam} <3");
+            Console.WriteLine($"{islemTipi} Islemi Result: {Result} <3");
         }
 
         public void Sayi1iAta()
         {
             Console.WriteLine("Sayi 1'i giriniz:");
 
-            Sayi1 = Convert.ToInt32(Console.ReadLine());
+            Number1 = Convert.ToInt32(Console.ReadLine());
         }
 
         public void Sayi2yiAta()
         {
             Console.WriteLine("Sayi 2'yi giriniz:");
 
-            Sayi2 = Convert.ToInt32(Console.ReadLine());
+            Number2 = Convert.ToInt32(Console.ReadLine());
         }
 
         public void HosGeldinizMesajiGoster()
         {
-            Console.WriteLine($"{Isim} Makinesine Hos Geldiniz.");
+            Console.WriteLine($"{Name} Makinesine Hos Geldiniz.");
         }
     }
 }
