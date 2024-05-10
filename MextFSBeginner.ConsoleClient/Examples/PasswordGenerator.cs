@@ -1,4 +1,4 @@
-﻿namespace MextFSBeginner.ConsoleClient
+﻿namespace MextFSBeginner.ConsoleClient.Examples
 {
     public class PasswordGenerator
     {

@@ -1,30 +1,18 @@
-﻿
-using MextFSBeginner.ConsoleClient;
+﻿// Create FilePath Variable
 
-Console.WriteLine("Ilk Hesap Makinesi icin bir isim giriniz:");
+string filePath = "C:\\Users\\alper\\Desktop\\AccessControlLogs.txt";
 
-var toplamaMakinesi = new Calculator(Console.ReadLine());
+// Read the file from the path (as text)
 
-toplamaMakinesi.HosGeldinizMesajiGoster();
+string logFileText = File.ReadAllText(filePath);
 
-toplamaMakinesi.Sayi1iAta();
+// Split the text into an array of strings by the new line character \n
 
-toplamaMakinesi.Sayi2yiAta();
+string[] logLines = logFileText.Split("\n",StringSplitOptions.RemoveEmptyEntries);
 
-toplamaMakinesi.ToplamaIslemi();
+// Create a loop on the logLines array
 
-var cikarmaMakinesi = new Calculator("Cikarma");
-
-cikarmaMakinesi.HosGeldinizMesajiGoster();
-
-cikarmaMakinesi.Sayi1iAta();
-
-cikarmaMakinesi.Sayi2yiAta();
-
-cikarmaMakinesi.CikarmaIslemi();
-
-Console.WriteLine($"Toplama Makinesinin Result Degeri:{toplamaMakinesi.Result} / Cikarma Makinesinin Result Degeri:{cikarmaMakinesi.Result}");
-
-var carpmaMakinesi = new Calculator("Carpma");
-
-carpmaMakinesi.HosGeldinizMesajiGoster();
+foreach (string logLine in logLines)
+{
+    string[] logValues = logLine.Split("---", StringSplitOptions.RemoveEmptyEntries);
+}
