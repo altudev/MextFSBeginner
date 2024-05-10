@@ -1,0 +1,63 @@
+﻿@page "/"
+@using MextFSBeginner.WasmClient.Entities
+@using MextFSBeginner.WasmClient.Enums
+
+<PageTitle>Home</PageTitle>
+
+<h1>ALPER</h1>
+<p>ALPER</p>
+<button>ALPER</button>
+
+<div class="card mb-4 border-primary" style="max-width: 20rem;">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title mb-0">Access Log #@AccessControlLog.Id</h5>
+    </div>
+    <div class="card-body">
+        <h6 class="card-subtitle text-muted mb-2">User ID: @AccessControlLog.UserId</h6>
+        <p class="card-text mb-3">Device: @AccessControlLog.DeviceSerialNumber</p>
+        <div class="d-flex justify-content-between">
+            <div>
+                <small class="text-muted">Access Date</small>
+                <p class="mb-0">@AccessControlLog.Date.ToString("yyyy-MM-dd HH:mm")</p>
+            </div>
+            <div>
+                <small class="text-muted">Approved Date</small>
+                <p class="mb-0">@AccessControlLog.ApprovedDate.ToString("yyyy-MM-dd HH:mm")</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <span class="badge @(AccessControlLog.IsApproved ? "bg-success" : "bg-danger")">
+            @(AccessControlLog.IsApproved ? "Approved" : "Denied")
+        </span>
+        <span class="badge bg-warning">
+            @AccessControlLog.AccessType
+        </span>
+    </div>
+</div>
+
+
+@code
+{
+    public string Name { get; set; } = "Alper Tunga";
+    public bool IsApproved { get; set; } = false;
+
+    public AccessControlLog AccessControlLog { get; set; } = new AccessControlLog()
+    {
+        Id = Guid.NewGuid(),
+        UserId = 25,
+        IsApproved = true,
+        AccessType = AccessType.FP,
+        DeviceSerialNumber = "FRNM3121049B",
+        Date = Convert.ToDateTime("2023-08-09T09:03:47+00:00"),
+        ApprovedDate = DateTime.Now
+    };
+
+
+    private void ChangeColor()
+    {
+        Console.WriteLine("Renk Degistirme Fonksiyonu Calisti.");
+
+        IsApproved = !IsApproved;
+    }
+}

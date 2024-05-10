@@ -1,6 +1,6 @@
-﻿using MextFSBeginner.ConsoleClient.Enums;
+﻿using MextFSBeginner.WasmClient.Enums;
 
-namespace MextFSBeginner.ConsoleClient.Entities
+namespace MextFSBeginner.WasmClient.Entities
 {
     public class AccessControlLog
     {
