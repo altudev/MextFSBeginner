@@ -1,63 +1,69 @@
 ﻿@page "/"
-@using MextFSBeginner.WasmClient.Entities
-@using MextFSBeginner.WasmClient.Enums
 
 <PageTitle>Home</PageTitle>
 
-<h1>ALPER</h1>
-<p>ALPER</p>
-<button>ALPER</button>
+<div class="d-flex justify-content-center">
+    <div class="card rounded-3 shadow-lg" style="width: 46rem;">
+        <div class="card-body">
+            <h4 class="card-title">Password Generator</h4>
+            @* Form Inputs Start *@
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">🔒</span>
+                <input type="text" class="form-control" @bind="@password">
+            </div>
 
-<div class="card mb-4 border-primary" style="max-width: 20rem;">
-    <div class="card-header bg-primary text-white">
-        <h5 class="card-title mb-0">Access Log #@AccessControlLog.Id</h5>
-    </div>
-    <div class="card-body">
-        <h6 class="card-subtitle text-muted mb-2">User ID: @AccessControlLog.UserId</h6>
-        <p class="card-text mb-3">Device: @AccessControlLog.DeviceSerialNumber</p>
-        <div class="d-flex justify-content-between">
-            <div>
-                <small class="text-muted">Access Date</small>
-                <p class="mb-0">@AccessControlLog.Date.ToString("yyyy-MM-dd HH:mm")</p>
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" @bind="@passwordLength">
+                <span class="input-group-text">|</span>
+                <input style="height: 2rem;" @oninput="GeneratePassword" type="range" step="1" min="6" max="30" class="form-range" @bind="@passwordLength">
             </div>
-            <div>
-                <small class="text-muted">Approved Date</small>
-                <p class="mb-0">@AccessControlLog.ApprovedDate.ToString("yyyy-MM-dd HH:mm")</p>
+            
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">1</label>
             </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+                <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+            </div>
+
+            @* Form Inputs End *@
         </div>
-    </div>
-    <div class="card-footer d-flex justify-content-between">
-        <span class="badge @(AccessControlLog.IsApproved ? "bg-success" : "bg-danger")">
-            @(AccessControlLog.IsApproved ? "Approved" : "Denied")
-        </span>
-        <span class="badge bg-warning">
-            @AccessControlLog.AccessType
-        </span>
     </div>
 </div>
 
 
+
+
 @code
 {
-    public string Name { get; set; } = "Alper Tunga";
-    public bool IsApproved { get; set; } = false;
+    private string password = "123456";
+    private int passwordLength = 6;
+    private bool includeNumbers = true;
+    private bool includeUppercase = false;
+    private bool includeLowercase = false;
+    private bool includeSpecialCharacters = false;
 
-    public AccessControlLog AccessControlLog { get; set; } = new AccessControlLog()
+    private Random random = new Random();
+
+    private void GeneratePassword(ChangeEventArgs args)
     {
-        Id = Guid.NewGuid(),
-        UserId = 25,
-        IsApproved = true,
-        AccessType = AccessType.FP,
-        DeviceSerialNumber = "FRNM3121049B",
-        Date = Convert.ToDateTime("2023-08-09T09:03:47+00:00"),
-        ApprovedDate = DateTime.Now
-    };
+        if (args.Value == null)
+            return;
 
+        passwordLength = Convert.ToInt32(args.Value);
 
-    private void ChangeColor()
-    {
-        Console.WriteLine("Renk Degistirme Fonksiyonu Calisti.");
+        password = "";
 
-        IsApproved = !IsApproved;
+        for (int i = 0; i < passwordLength; i++)
+        {
+            int randomNumber = random.Next(0, 10);
+
+            password += randomNumber;
+        }
     }
 }
