@@ -15,20 +15,29 @@
             <div class="input-group mb-3">
                 <input type="number" class="form-control" @bind="@passwordLength">
                 <span class="input-group-text">|</span>
-                <input style="height: 2rem;" @oninput="GeneratePassword" type="range" step="1" min="6" max="30" class="form-range" @bind="@passwordLength">
+                <input style="height: 2rem;" @oninput="HandleRangeOnChange" type="range" step="1" min="6" max="30" class="form-range" @bind="@passwordLength">
             </div>
             
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">1</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
-                <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+            <div class="d-flex justify-content-between">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="includeNumbers" @bind="@includeNumbers" @oninput="@((args) => HandleCheckBoxOnChange(args, CheckBoxActionType.Numbers))">
+                    <label class="form-check-label" for="includeNumbers">Numbers</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="includeLowercase" @bind="@includeLowercase" @oninput="@((args) => HandleCheckBoxOnChange(args,CheckBoxActionType.Lowercase))">
+                    <label class="form-check-label" for="includeLowercase">Lowercase</label>
+                </div>
+            
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="includeUppercase" @bind="@includeUppercase" @oninput="@((args) => HandleCheckBoxOnChange(args,CheckBoxActionType.Uppercase))">
+                    <label class="form-check-label" for="includeUppercase">Uppercase</label>
+                </div>
+            
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="includeSpecialCharacters" @bind="@includeSpecialCharacters" @oninput="@((args) => HandleCheckBoxOnChange(args,CheckBoxActionType.SpecialCharacters))">
+                    <label class="form-check-label" for="includeSpecialCharacters">Special Characters</label>
+                </div>
             </div>
 
             @* Form Inputs End *@
@@ -38,11 +47,11 @@
 
 
 
-
 @code
 {
     private string password = "123456";
     private int passwordLength = 6;
+
     private bool includeNumbers = true;
     private bool includeUppercase = false;
     private bool includeLowercase = false;
@@ -50,19 +59,67 @@
 
     private Random random = new Random();
 
-    private void GeneratePassword(ChangeEventArgs args)
+    private void HandleRangeOnChange(ChangeEventArgs args)
     {
         if (args.Value == null)
             return;
 
         passwordLength = Convert.ToInt32(args.Value);
 
+        GeneratePassword();
+    }
+
+    private void HandleCheckBoxOnChange(ChangeEventArgs args, CheckBoxActionType actionType)
+    {
+        if (args.Value == null)
+         return;
+
+        bool isChecked = Convert.ToBoolean(args.Value);
+
+
+        if (actionType == CheckBoxActionType.Numbers)
+            includeNumbers = isChecked;
+
+        else if(actionType == CheckBoxActionType.Lowercase)
+            includeLowercase = isChecked;
+
+        else if (actionType == CheckBoxActionType.Uppercase)
+            includeUppercase = isChecked;
+
+        else if (actionType == CheckBoxActionType.SpecialCharacters)
+            includeSpecialCharacters = isChecked;
+        
+    }
+
+    private void GeneratePassword()
+    {
         password = "";
+
+        // Lowercase Characters String
+        const string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+        const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const string numberChars = "0123456789";
+        const string specialChars = "!@#$%^&*()_+";
+
+        string charsToUse = "";
+
+        if (includeLowercase)
+            charsToUse += lowercaseChars;
+        
+        if (includeUppercase)
+            charsToUse += uppercaseChars;
+
+        if (includeNumbers)
+            charsToUse += numberChars;
+
+        if (includeSpecialCharacters)
+            charsToUse += specialChars;
+
+        charsToUse = "ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789!@#$%^&*()_+";
 
         for (int i = 0; i < passwordLength; i++)
         {
-            int randomNumber = random.Next(0, 10);
-
+            int randomNumber = random.Next(0, charsToUse.Length);
             password += randomNumber;
         }
     }
