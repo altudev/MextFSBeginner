@@ -11,6 +11,9 @@
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">🔒</span>
                 <input type="text" class="form-control" @bind="@password">
+                <button class="btn btn-outline-secondary" type="button">📋</button>
+                <button class="@buttonClass" type="button" @onmouseenter="() => ChangeColor(true)"
+                        @onmouseleave="() => ChangeColor(false)" @onclick="GeneratePassword">🔄</button>
             </div>
 
             <div class="input-group mb-3">
@@ -126,5 +129,14 @@
 
             password += charsToUse[randomIndex];
         }
+
+        
+    }
+
+    string buttonClass = "btn btn-outline-secondary";
+
+    void ChangeColor(bool isMouseOver)
+    {
+        buttonClass = isMouseOver ? "btn btn-outline-danger" : "btn btn-outline-secondary";
     }
 }
