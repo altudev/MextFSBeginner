@@ -2,6 +2,7 @@
 @using MextFSBeginner.WasmClient.Enums
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
+@inject IToastService ToastService
 
 
 <PageTitle>Home</PageTitle>
@@ -168,11 +169,12 @@
     async Task CopyPasswordToClipboard()
     {
         await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", password);
-        
-        savedPasswords.Add(password);
 
-        // Reverse the list to show the last added password at the top
-        savedPasswords.Reverse();
+        // Bir sey var mi yok mu kontrolu (listede sifre var mi kontrol ediyoruz)
+        if (!savedPasswords.Any(p => p == password))
+                savedPasswords.Insert(0, password);
+
+        ToastService.ShowSuccess("The selected password saved.");
     }
 
     private void RedirectToCounterPage()
