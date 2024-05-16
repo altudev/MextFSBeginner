@@ -1,5 +1,8 @@
 ﻿@page "/"
 @using MextFSBeginner.WasmClient.Enums
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
 
 <PageTitle>Home</PageTitle>
 
@@ -11,7 +14,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">🔒</span>
                 <input type="text" class="form-control" @bind="@password">
-                <button class="btn btn-outline-secondary" type="button">📋</button>
+                <button class="btn btn-outline-secondary" type="button" @onclick="CopyPasswordToClipboard">📋</button>
                 <button class="@buttonClass" type="button" @onmouseenter="() => ChangeColor(true)"
                         @onmouseleave="() => ChangeColor(false)" @onclick="GeneratePassword">🔄</button>
             </div>
@@ -43,16 +46,38 @@
                     <label class="form-check-label" for="includeSpecialCharacters">Special Characters</label>
                 </div>
             </div>
+            
+            <div class="input-group mt-3">
+                <button class="btn btn-warning" @onclick="RedirectToCounterPage">Beni Counter Sayfasina Yonlendir</button>
+                <button class="btn btn-success" @onclick="RedirectToWheatherPage">Beni Wheather Sayfasina Yonlendir</button>
+                <button class="btn btn-secondary" @onclick="RedirectToPasswordGeneratorPage">Beni PasswordGenerator Sayfasina Yonlendir</button>
+            </div>
 
             @* Form Inputs End *@
         </div>
     </div>
 </div>
 
+<div class="d-flex justify-content-center mt-5">
+    <div class="card rounded-3 shadow-lg" style="width: 46rem;">
+        <div class="card-body">
+            <h4 class="card-title">Saved Passwords</h4>
+            @* Form Inputs Start *@
+            <ul class="list-group text-center">
+                @foreach (string password in savedPasswords)
+                {
+                    <li class="list-group-item">@password</li>
+                }
+            </ul>
+            @* Form Inputs End *@
+        </div>
+    </div>
+</div>
 
 
 @code
 {
+    List<string> savedPasswords = new List<string>();
     private string password = "123456";
     private int passwordLength = 6;
 
@@ -139,4 +164,36 @@
     {
         buttonClass = isMouseOver ? "btn btn-outline-danger" : "btn btn-outline-secondary";
     }
+
+    async Task CopyPasswordToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", password);
+        
+        savedPasswords.Add(password);
+
+        // Reverse the list to show the last added password at the top
+        savedPasswords.Reverse();
+    }
+
+    private void RedirectToCounterPage()
+    {
+        NavigationManager.NavigateTo("/counter");
+    }
+
+    private void RedirectToWheatherPage()
+    {
+        NavigationManager.NavigateTo("/weather");
+    }
+
+    private void RedirectToPasswordGeneratorPage()
+    {
+        NavigationManager.NavigateTo("/passwordgenerator");
+    }
 }
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #A0DEFF, #CAF4FF);
+        /* Diğer stillendirme kodları buraya eklenebilir */
+    }
+</style>
