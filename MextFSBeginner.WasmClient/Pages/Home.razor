@@ -15,7 +15,8 @@
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">🔒</span>
                 <input type="text" class="form-control" @bind="@password">
-                <button class="btn btn-outline-secondary" type="button" @onclick="CopyPasswordToClipboard">📋</button>
+                <button class="btn btn-outline-info" type="button" @onclick="HandleSaveButtonClick">💾</button>
+                <button class="btn btn-outline-secondary" type="button" @onclick="@(() => CopyPasswordToClipboard(null))">📋</button>
                 <button class="@buttonClass" type="button" @onmouseenter="() => ChangeColor(true)"
                         @onmouseleave="() => ChangeColor(false)" @onclick="GeneratePassword">🔄</button>
             </div>
@@ -67,7 +68,12 @@
             <ul class="list-group text-center">
                 @foreach (string password in savedPasswords)
                 {
-                    <li class="list-group-item">@password</li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>@password</span>
+                        <button class="btn btn-outline-secondary" type="button" @onclick="@(() => CopyPasswordToClipboard(password))">📋</button>
+                        <button class="btn btn-outline-danger ms-auto" type="button" @onclick="@(() => HandleDeleteButtonClick(password))">🗑️</button>
+                    </li>
+
                 }
             </ul>
             @* Form Inputs End *@
@@ -163,18 +169,40 @@
 
     void ChangeColor(bool isMouseOver)
     {
-        buttonClass = isMouseOver ? "btn btn-outline-danger" : "btn btn-outline-secondary";
+        buttonClass = isMouseOver ? "btn btn-outline-primary" : "btn btn-outline-secondary";
     }
 
-    async Task CopyPasswordToClipboard()
+    private void HandleSaveButtonClick()
     {
-        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", password);
-
         // Bir sey var mi yok mu kontrolu (listede sifre var mi kontrol ediyoruz)
-        if (!savedPasswords.Any(p => p == password))
-                savedPasswords.Insert(0, password);
+        if (savedPasswords.Any(p => p == password))
+        {
+            ToastService.ShowWarning("The selected password already saved.");
+            return;
+        }
+
+        savedPasswords.Insert(0, password);
 
         ToastService.ShowSuccess("The selected password saved.");
+    }
+
+    private void HandleDeleteButtonClick(string password)
+    {
+        savedPasswords.Remove(password);
+
+        ToastService.ShowSuccess("The selected password deleted.");
+    }
+
+    async Task CopyPasswordToClipboard(string? passwordToCopy)
+    {
+        if (string.IsNullOrWhiteSpace(passwordToCopy))
+            await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", password);
+
+        else
+            await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", passwordToCopy);
+        
+
+        ToastService.ShowSuccess("The password copied.");
     }
 
     private void RedirectToCounterPage()
