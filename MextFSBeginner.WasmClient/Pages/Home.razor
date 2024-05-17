@@ -60,26 +60,17 @@
     </div>
 </div>
 
-<div class="d-flex justify-content-center mt-5">
-    <div class="card rounded-3 shadow-lg" style="width: 46rem;">
-        <div class="card-body">
-            <h4 class="card-title">Saved Passwords</h4>
-            @* Form Inputs Start *@
-            <ul class="list-group text-center">
-                @foreach (string password in savedPasswords)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>@password</span>
-                        <button class="btn btn-outline-secondary" type="button" @onclick="@(() => CopyPasswordToClipboard(password))">📋</button>
-                        <button class="btn btn-outline-danger ms-auto" type="button" @onclick="@(() => HandleDeleteButtonClick(password))">🗑️</button>
-                    </li>
+<SavedPasswordsCard SavedPasswords="savedPasswords"
+                    CopyPasswordToClipboardCallback="CopyPasswordToClipboard"
+                    HandleDeleteButtonClickCallback="HandleDeleteButtonClick"
+                    CardTitle="Alper Tunga's Saved Passwords"
+/>
 
-                }
-            </ul>
-            @* Form Inputs End *@
-        </div>
-    </div>
-</div>
+<ExampleButton CSS="btn btn-success" Title="Alper Hocam" SizeType="ButtonSizeType.Small"></ExampleButton>
+<ExampleButton CSS="btn btn-success" Title="Alper Hocam"></ExampleButton>
+<ExampleButton CSS="btn btn-success" Title="Alper Hocam" SizeType="ButtonSizeType.Large"></ExampleButton>
+
+
 
 
 @code
