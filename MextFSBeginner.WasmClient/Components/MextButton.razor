@@ -1,0 +1,88 @@
+﻿@using MextFSBeginner.WasmClient.Enums
+<button class="@GetCSS()">@Title</button>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter] public string CSS { get; set; }
+
+    [Parameter] public ButtonSizeType SizeType { get; set; } = ButtonSizeType.Medium;
+
+    [Parameter] public ButtonColourType ColourType { get; set; } = ButtonColourType.Primary;
+
+    public string InnerCSS { get; set; } = string.Empty;
+
+
+    private string GetCSS()
+    {
+        InnerCSS = string.Empty;
+
+        InnerCSS += CSS;
+
+        InnerCSS += " btn";
+
+        // text-center
+
+        switch (SizeType)
+        {
+            case ButtonSizeType.Small:
+                InnerCSS += $" btn-sm";
+                break;
+
+            case ButtonSizeType.Large:
+                InnerCSS += $" btn-lg";
+                break;
+
+            case ButtonSizeType.Medium:
+            default:
+                break;
+        }
+
+        // text-center btn-sm btn btn-danger
+                            //Danger
+        InnerCSS += $" btn-{ColourType.ToString().ToLower()}";
+
+        // switch (ColourType)
+        // {
+        //     case ButtonColourType.Primary:
+        //         InnerCSS += $" btn-primary";
+        //         break;
+
+        //     case ButtonColourType.Secondary:
+        //         InnerCSS += $" btn-secondary";
+        //         break;
+
+        //     case ButtonColourType.Success:
+        //         InnerCSS += $" btn-success";
+        //         break;
+
+        //     case ButtonColourType.Danger:
+        //         InnerCSS += $" btn-danger";
+        //         break;
+
+        //     case ButtonColourType.Warning:
+        //         InnerCSS += $" btn-warning";
+        //         break;
+
+        //     case ButtonColourType.Info:
+        //         InnerCSS += $" btn-info";
+        //         break;
+
+        //     case ButtonColourType.Light:
+        //         InnerCSS += $" btn-light";
+        //         break;
+
+        //     case ButtonColourType.Dark:
+        //         InnerCSS += $" btn-dark";
+        //         break;
+
+        //     default:
+        //         InnerCSS += $" btn-primary";
+        //         break;
+
+        // }
+
+        return InnerCSS;
+    }
+}
