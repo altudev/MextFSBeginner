@@ -5,9 +5,12 @@ namespace MextFSBeginner.Domain.Entities
     public class Account
     {
         public Guid Id { get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public bool IsDecrypted { get; set; }
+        public bool IsShown { get; set; }
+        public bool IsFavourite { get; set; }
 
         public string Encrypt()
         {

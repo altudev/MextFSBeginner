@@ -8,11 +8,89 @@
 
 <PageTitle>Home</PageTitle>
 
-<MextPageTitle Title="Home Page" TitleCSS="text-primary" />
-
-<span class="d-block">UserName:@Account.UserName</span>
-<span class="d-block">Password:@(Account.IsDecrypted ? Account.Password : "*************")</span>
-<button class="btn btn-info" @onclick="HandleEncryption">Sifrele</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="account-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Cambly</h5>
+                    <button type="button" class="btn btn-outline-warning btn-sm">★</button>
+                </div>
+                <div class="input-group mb-2 mt-2">
+                    <input type="text" class="form-control" value="alpertunga04@yandex.com" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="password" class="form-control" id="passwordInput" value="password123" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
+                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary btn-open" type="button">Open in browser</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="account-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Cambly</h5>
+                    <button type="button" class="btn btn-outline-warning btn-sm">★</button>
+                </div>
+                <div class="input-group mb-2 mt-2">
+                    <input type="text" class="form-control" value="alpertunga04@yandex.com" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="password" class="form-control" id="passwordInput" value="password123" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
+                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary btn-open" type="button">Open in browser</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="account-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Cambly</h5>
+                    <button type="button" class="btn btn-outline-warning btn-sm">★</button>
+                </div>
+                <div class="input-group mb-2 mt-2">
+                    <input type="text" class="form-control" value="alpertunga04@yandex.com" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="password" class="form-control" id="passwordInput" value="password123" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
+                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary btn-open" type="button">Open in browser</button>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat similar cards for other accounts -->
+    </div>
+</div>
 
 @code
 {
@@ -21,28 +99,45 @@
         Id = Guid.NewGuid(),
         UserName = "alper.tunga@yazilim.academy",
         Password = "123alpertunga123",
-        IsDecrypted = true,
+        IsShown = true,
         // IsShown = false
     };
 
     private void HandleEncryption()
     {
-        if (Account.IsDecrypted)
+        if (Account.IsShown)
         {
             Account.Encrypt();
-            Account.IsDecrypted=false;
+            Account.IsShown=false;
         }
         else
         {
             Account.Decrypt();
-            Account.IsDecrypted = true;
+            Account.IsShown = true;
         }
     }
 }
-
 <style>
-    body {
-        background: linear-gradient(to bottom, #A0DEFF, #CAF4FF);
-        /* Diğer stillendirme kodları buraya eklenebilir */
+    .account-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .account-card .card-title {
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+    .account-card .card-text {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    .btn-open {
+        width: 100%;
+    }
+    .password-alert {
+        color: #dc3545;
+        font-size: 0.875rem;
     }
 </style>
