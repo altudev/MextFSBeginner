@@ -1,0 +1,74 @@
+﻿@using MextFSBeginner.Domain.Entities
+<div class="account-card">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-title">@Account.Title</h5>
+        <button type="button" class="@(Account.IsFavourite ? "btn btn-warning btn-sm" : "btn btn-outline-warning btn-sm")">★</button>
+    </div>
+    <div class="input-group mb-2 mt-2">
+        <input type="text" class="form-control" @bind="Account.UserName" readonly>
+        <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
+            <i class="bi bi-clipboard"></i>
+        </button>
+    </div>
+    <div class="input-group mb-2">
+        <input type="@(Account.IsShown ? "text" : "password")" class="form-control" id="passwordInput" @bind="Account.Password" readonly>
+        <button class="btn btn-outline-secondary" type="button" @onclick="TogglePasswordVisibility">
+            <i class="bi bi-eye" id="togglePasswordIcon"></i>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
+            <i class="bi bi-clipboard"></i>
+        </button>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-primary btn-open" type="button">Open in browser</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Account Account { get; set; }
+
+    private void TogglePasswordVisibility()
+    {
+        // Sifre gosteriliyorsa sifreyi gizle
+        if(Account.IsShown)
+        {
+            Account.Encrypt();
+            Account.IsShown = false;
+        }
+        // Sifre gizliyse sifreyi goster
+        else
+        {
+            Account.Decrypt();
+            Account.IsShown = true;
+        }
+    }
+}
+
+<style>
+    .account-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+        .account-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .account-card .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+    .btn-open {
+        width: 100%;
+    }
+
+    .password-alert {
+        color: #dc3545;
+        font-size: 0.875rem;
+    }
+</style>

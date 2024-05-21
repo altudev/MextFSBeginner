@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.ConsoleClien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.WasmClient", "MextFSBeginner.WasmClient\MextFSBeginner.WasmClient.csproj", "{F9478238-A401-452D-BB90-CAA13E593340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.Domain", "MextFSBeginner.Domain\MextFSBeginner.Domain.csproj", "{BE84D6AB-8FAB-4E44-9817-56FECF6EEECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.Domain", "MextFSBeginner.Domain\MextFSBeginner.Domain.csproj", "{BE84D6AB-8FAB-4E44-9817-56FECF6EEECC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

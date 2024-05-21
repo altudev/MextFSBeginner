@@ -10,134 +10,71 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <div class="account-card">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Cambly</h5>
-                    <button type="button" class="btn btn-outline-warning btn-sm">★</button>
-                </div>
-                <div class="input-group mb-2 mt-2">
-                    <input type="text" class="form-control" value="alpertunga04@yandex.com" readonly>
-                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="input-group mb-2">
-                    <input type="password" class="form-control" id="passwordInput" value="password123" readonly>
-                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
-                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
-                    </button>
-                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-primary btn-open" type="button">Open in browser</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="account-card">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Cambly</h5>
-                    <button type="button" class="btn btn-outline-warning btn-sm">★</button>
-                </div>
-                <div class="input-group mb-2 mt-2">
-                    <input type="text" class="form-control" value="alpertunga04@yandex.com" readonly>
-                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="input-group mb-2">
-                    <input type="password" class="form-control" id="passwordInput" value="password123" readonly>
-                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
-                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
-                    </button>
-                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-primary btn-open" type="button">Open in browser</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="account-card">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Cambly</h5>
-                    <button type="button" class="btn btn-outline-warning btn-sm">★</button>
-                </div>
-                <div class="input-group mb-2 mt-2">
-                    <input type="text" class="form-control" value="alpertunga04@yandex.com" readonly>
-                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="input-group mb-2">
-                    <input type="password" class="form-control" id="passwordInput" value="password123" readonly>
-                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
-                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
-                    </button>
-                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
-                        <i class="bi bi-clipboard"></i>
-                    </button>
-                </div>
-                <div class="d-grid gap-2 d-md-block">
-                    <button class="btn btn-primary btn-open" type="button">Open in browser</button>
-                </div>
-            </div>
-        </div>
-        <!-- Repeat similar cards for other accounts -->
+       @if (accounts == null)
+       {
+            <div class="full-screen-center">
+               <div class="d-flex justify-content-center align-items-center">
+                   <h3 class="text-primary me-3 h1">Loading.. </h3>
+                   <div class="spinner-border text-primary h1" role="status">
+                       <span class="visually-hidden">Loading...</span>
+                   </div>
+               </div>
+           </div>
+       }
+       else
+       {
+           @foreach (var account in accounts)
+           {
+               <div class="col-md-4">
+                   <AccountCard Account="account"></AccountCard>
+               </div>
+           }
+       }
     </div>
 </div>
 
 @code
 {
-    public Account Account = new Account()
-    {
-        Id = Guid.NewGuid(),
-        UserName = "alper.tunga@yazilim.academy",
-        Password = "123alpertunga123",
-        IsShown = true,
-        // IsShown = false
-    };
+    List<Account> accounts = null;
 
-    private void HandleEncryption()
+    protected override async Task OnInitializedAsync()
     {
-        if (Account.IsShown)
+        await Task.Delay(3000);
+
+        accounts = new List<Account>
         {
-            Account.Encrypt();
-            Account.IsShown=false;
-        }
-        else
-        {
-            Account.Decrypt();
-            Account.IsShown = true;
-        }
+            new Account()
+            {
+                Id = Guid.NewGuid(),
+                UserName = "alper.tunga@yazilim.academy",
+                Password = "123alpertunga123",
+                IsShown = true,
+                Title = "Yazilim Academy",
+                Url = "https://www.youtube.com",
+                IsFavourite = true
+            },
+            new Account()
+            {
+                Id = Guid.NewGuid(),
+                UserName = "muberra.gungoren@google.com",
+                Password = "123golkenari123",
+                IsShown = true,
+                Title = "Google",
+                Url = "https://www.google.com",
+                IsFavourite = false
+            }
+        };
+
+        await base.OnInitializedAsync();
     }
 }
+
+                
 <style>
-    .account-card {
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 1rem;
-        margin: 1rem 0;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    .account-card .card-title {
-        font-size: 1.25rem;
-        font-weight: 500;
-    }
-    .account-card .card-text {
-        font-size: 1rem;
-        color: #6c757d;
-    }
-    .btn-open {
-        width: 100%;
-    }
-    .password-alert {
-        color: #dc3545;
-        font-size: 0.875rem;
+    .full-screen-center {
+        height: 100vh; /* Full height (viewport height) */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
