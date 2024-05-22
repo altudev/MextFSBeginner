@@ -6,7 +6,7 @@
 <div class="account-card">
     <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-title">@Account.Title</h5>
-        <button type="button" class="@(Account.IsFavourite ? "btn btn-warning btn-sm" : "btn btn-outline-warning btn-sm")">★</button>
+        <button @onclick="HandleFavouriteButtonClick" type="button" class="@(Account.IsFavourite ? "btn btn-warning btn-sm" : "btn btn-outline-warning btn-sm")">★</button>
     </div>
     <div class="input-group mb-2 mt-2">
         <input type="text" class="form-control" @bind="Account.UserName" readonly>
@@ -71,6 +71,11 @@
 
         ToastService.ShowSuccess("Username successfully copied.");
        
+    }
+
+    private void HandleFavouriteButtonClick()
+    {
+        Account.IsFavourite = !Account.IsFavourite;
     }
 }
 

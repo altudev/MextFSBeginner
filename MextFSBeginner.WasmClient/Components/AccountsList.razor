@@ -5,6 +5,23 @@
 @using MextFSBeginner.Domain.Entities
 <div class="container">
     <div class="row">
+        
+        @*    <select class="form-select" aria-label="Default select example">
+            <option selected disabled="disabled">Select a Sorting</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select> *@
+        
+        <div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" @bind=@showFavourites @oninput=@HandleFilterCheckboxOnChange id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Favourites
+                </label>
+            </div>
+        </div>
+
         @if (accounts == null)
         {
             <div class="full-screen-center">
@@ -18,7 +35,7 @@
         }
         else
         {
-            @foreach (var account in accounts)
+            @foreach (var account in filteredAccounts)
             {
                 <div class="col-md-4">
                     <AccountCard Account="account"></AccountCard>
@@ -30,6 +47,9 @@
 
 @code {
     List<Account> accounts = null;
+    List<Account> filteredAccounts = null;
+
+    private bool showFavourites = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,8 +61,8 @@
             {
                 Id = Guid.NewGuid(),
                 UserName = "alper.tunga@yazilim.academy",
-                Password = "123alpertunga123",
-                IsShown = true,
+                Password = "MTIzYWxwZXJ0dW5nYTEyMw==",
+                IsShown = false,
                 Title = "Yazilim Academy",
                 Url = "https://www.youtube.com",
                 IsFavourite = true
@@ -51,17 +71,72 @@
             {
                 Id = Guid.NewGuid(),
                 UserName = "muberra.gungoren@google.com",
-                Password = "123golkenari123",
-                IsShown = true,
+                Password = "MTIzZ29sa2VuYXJpMTIz",
+                IsShown = false,
                 Title = "Google",
                 Url = "https://www.google.com",
+                IsFavourite = false
+            },
+            new Account()
+            {
+                Id = Guid.NewGuid(),
+                UserName = "john.doe@example.com",
+                Password = "MTIzam9obmRvZTEyMw==",
+                IsShown = false,
+                Title = "Example",
+                Url = "https://www.example.com",
+                IsFavourite = true
+            },
+            new Account()
+            {
+                Id = Guid.NewGuid(),
+                UserName = "jane.smith@gmail.com",
+                Password = "MTIzamFuZXNtaXRoMTIz",
+                IsShown = false,
+                Title = "Gmail",
+                Url = "https://www.gmail.com",
+                IsFavourite = false
+            },
+            new Account()
+            {
+                Id = Guid.NewGuid(),
+                UserName = "michael.johnson@outlook.com",
+                Password = "MTIzbWljaGFlbGpvaG5zb24xMjM=",
+                IsShown = false,
+                Title = "Outlook",
+                Url = "https://www.outlook.com",
+                IsFavourite = true
+            },
+            new Account()
+            {
+                Id = Guid.NewGuid(),
+                UserName = "sarah.wilson@yahoo.com",
+                Password = "MTIzc2FyYWh3aWxzb24xMjM=",
+                IsShown = false,
+                Title = "Yahoo",
+                Url = "https://www.yahoo.com",
                 IsFavourite = false
             }
         };
 
+        filteredAccounts = new List<Account>(accounts);
+
         await base.OnInitializedAsync();
     }
 
+    private void HandleFilterCheckboxOnChange(ChangeEventArgs args)
+    {
+        if (args == null)
+         return;
 
+        showFavourites = Convert.ToBoolean(args.Value);
+
+        if (showFavourites)
+            filteredAccounts = accounts.Where(a => a.IsFavourite).ToList();
+
+        else
+            filteredAccounts = new List<Account>(accounts);
+        
+    }
     
 }
