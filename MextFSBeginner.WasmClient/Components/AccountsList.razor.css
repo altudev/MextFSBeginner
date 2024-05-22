@@ -1,0 +1,6 @@
+﻿.full-screen-center {
+    height: 100vh; /* Full height (viewport height) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

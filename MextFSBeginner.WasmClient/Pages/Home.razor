@@ -1,6 +1,4 @@
 ﻿@page "/"
-@using MextFSBeginner.Domain.Entities
-@using MextFSBeginner.WasmClient.Enums
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
@@ -8,73 +6,9 @@
 
 <PageTitle>Home</PageTitle>
 
-<div class="container">
-    <div class="row">
-       @if (accounts == null)
-       {
-            <div class="full-screen-center">
-               <div class="d-flex justify-content-center align-items-center">
-                   <h3 class="text-primary me-3 h1">Loading.. </h3>
-                   <div class="spinner-border text-primary h1" role="status">
-                       <span class="visually-hidden">Loading...</span>
-                   </div>
-               </div>
-           </div>
-       }
-       else
-       {
-           @foreach (var account in accounts)
-           {
-               <div class="col-md-4">
-                   <AccountCard Account="account"></AccountCard>
-               </div>
-           }
-       }
-    </div>
-</div>
+<AccountsList />
 
 @code
 {
-    List<Account> accounts = null;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await Task.Delay(3000);
-
-        accounts = new List<Account>
-        {
-            new Account()
-            {
-                Id = Guid.NewGuid(),
-                UserName = "alper.tunga@yazilim.academy",
-                Password = "123alpertunga123",
-                IsShown = true,
-                Title = "Yazilim Academy",
-                Url = "https://www.youtube.com",
-                IsFavourite = true
-            },
-            new Account()
-            {
-                Id = Guid.NewGuid(),
-                UserName = "muberra.gungoren@google.com",
-                Password = "123golkenari123",
-                IsShown = true,
-                Title = "Google",
-                Url = "https://www.google.com",
-                IsFavourite = false
-            }
-        };
-
-        await base.OnInitializedAsync();
-    }
+    
 }
-
-                
-<style>
-    .full-screen-center {
-        height: 100vh; /* Full height (viewport height) */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>

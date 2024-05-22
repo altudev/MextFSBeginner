@@ -1,4 +1,8 @@
 ﻿@using MextFSBeginner.Domain.Entities
+
+@inject IJSRuntime JSRuntime
+@inject IToastService ToastService
+
 <div class="account-card">
     <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-title">@Account.Title</h5>
@@ -6,7 +10,7 @@
     </div>
     <div class="input-group mb-2 mt-2">
         <input type="text" class="form-control" @bind="Account.UserName" readonly>
-        <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('alpertunga04@yandex.com')">
+        <button class="btn btn-outline-secondary" type="button" @onclick="@(() => CopyToClipboard(isPassword:false))">
             <i class="bi bi-clipboard"></i>
         </button>
     </div>
@@ -15,12 +19,12 @@
         <button class="btn btn-outline-secondary" type="button" @onclick="TogglePasswordVisibility">
             <i class="bi bi-eye" id="togglePasswordIcon"></i>
         </button>
-        <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('password123')">
+        <button class="btn btn-outline-secondary" type="button" @onclick="@(() => CopyToClipboard(isPassword:true))">
             <i class="bi bi-clipboard"></i>
         </button>
     </div>
     <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary btn-open" type="button">Open in browser</button>
+        <a class="btn btn-primary btn-open" href="@Account.Url" target="_blank" type="button">Open in browser</a>
     </div>
 </div>
 
@@ -41,6 +45,32 @@
             Account.Decrypt();
             Account.IsShown = true;
         }
+    }
+
+    async Task CopyToClipboard(bool isPassword)
+    {
+        if (isPassword)
+        {
+            if (Account.IsShown)
+            {
+                await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", Account.Password);
+            }
+            else
+            {
+                Account.Decrypt();
+                await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", Account.Password);
+                Account.Encrypt();
+            }
+
+            ToastService.ShowSuccess("Password successfully copied.");
+
+            return;
+        }
+
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", Account.UserName);
+
+        ToastService.ShowSuccess("Username successfully copied.");
+       
     }
 }
 
