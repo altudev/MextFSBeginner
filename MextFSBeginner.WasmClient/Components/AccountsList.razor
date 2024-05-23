@@ -12,8 +12,15 @@
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select> *@
-        
-        <div>
+
+        <div class="d-flex">
+            <div class="form-check me-5">
+                <input class="form-check-input" type="checkbox" @bind=@sortByAscending @oninput=@HandleSortByCheckboxOnChange id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Sort By A-Z
+                </label>
+            </div>
+            
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" @bind=@showFavourites @oninput=@HandleFilterCheckboxOnChange id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
@@ -50,6 +57,10 @@
     List<Account> filteredAccounts = null;
 
     private bool showFavourites = false;
+
+    // Asceding = Artan / Descending = Azalan
+    // A'dan Z'ye - 0'dan 100'e /  Z'den A'ya - 100'den 0'a
+    private bool sortByAscending = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -119,7 +130,9 @@
             }
         };
 
-        filteredAccounts = new List<Account>(accounts);
+        filteredAccounts = new List<Account>(accounts)
+            .OrderBy(a=>a.Title)
+            .ToList();
 
         await base.OnInitializedAsync();
     }
@@ -136,7 +149,33 @@
 
         else
             filteredAccounts = new List<Account>(accounts);
+
+         SortAccounts();
         
     }
+
+    private void HandleSortByCheckboxOnChange(ChangeEventArgs args)
+    {
+        if (args == null)
+            return;
+
+        sortByAscending = Convert.ToBoolean(args.Value);
+
+        SortAccounts();
+    }
+
+    private void SortAccounts()
+    {
+        if (sortByAscending)
+            filteredAccounts = filteredAccounts
+                .OrderBy(ac => ac.Title)
+                .ToList();
+        else
+            filteredAccounts = filteredAccounts
+                .OrderByDescending(ac => ac.Title)
+                .ToList();
+    }
+
+
     
 }
