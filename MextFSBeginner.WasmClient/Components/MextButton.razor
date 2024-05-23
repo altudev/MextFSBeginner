@@ -1,5 +1,5 @@
 ﻿@using MextFSBeginner.WasmClient.Enums
-<button class="@GetCSS()">@Title</button>
+<button class="@GetCSS()" @onclick="HandleButtonOnClick">@Title</button>
 
 @code {
     [Parameter]
@@ -11,8 +11,15 @@
 
     [Parameter] public ButtonColourType ColourType { get; set; } = ButtonColourType.Primary;
 
+    [Parameter] public EventCallback OnClickCallback { get; set; }
+
     public string InnerCSS { get; set; } = string.Empty;
 
+
+    private async Task HandleButtonOnClick()
+    {
+        await OnClickCallback.InvokeAsync();
+    }
 
     private string GetCSS()
     {

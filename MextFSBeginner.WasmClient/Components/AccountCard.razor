@@ -31,6 +31,9 @@
 @code {
     [Parameter] public Account Account { get; set; }
 
+    [Parameter]
+    public EventCallback<Account> FilterAccountsByIsFavouriteCallback { get; set; }
+
     private void TogglePasswordVisibility()
     {
         // Sifre gosteriliyorsa sifreyi gizle
@@ -73,9 +76,11 @@
        
     }
 
-    private void HandleFavouriteButtonClick()
+    private async Task HandleFavouriteButtonClick()
     {
         Account.IsFavourite = !Account.IsFavourite;
+
+        await FilterAccountsByIsFavouriteCallback.InvokeAsync(Account);
     }
 }
 

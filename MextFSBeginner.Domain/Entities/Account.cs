@@ -11,6 +11,7 @@ namespace MextFSBeginner.Domain.Entities
         public string Password { get; set; }
         public bool IsShown { get; set; }
         public bool IsFavourite { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string Encrypt()
         {

@@ -3,29 +3,32 @@
 @inject IToastService ToastService
 
 @using MextFSBeginner.Domain.Entities
+@using MextFSBeginner.WasmClient.Enums
 <div class="container">
     <div class="row">
-        
-        @*    <select class="form-select" aria-label="Default select example">
-            <option selected disabled="disabled">Select a Sorting</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select> *@
 
-        <div class="d-flex">
-            <div class="form-check me-5">
-                <input class="form-check-input" type="checkbox" @bind=@sortByAscending @oninput=@HandleSortByCheckboxOnChange id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Sort By A-Z
-                </label>
-            </div>
-            
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" @bind=@showFavourites @oninput=@HandleFilterCheckboxOnChange id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Favourites
-                </label>
+        <div class="d-flex justify-content-start align-items-center">
+            <select class="form-select w-25 me-3" aria-label="Default select example" @onchange="HandleSortingTypeOnChange">
+                <option value="@AccountSortingType.Title" selected>Title</option>
+                <option value="@AccountSortingType.IsFavourite">Favourites</option>
+                <option value="@AccountSortingType.CreatedOn">Dates</option>
+            </select>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="form-check me-3">
+                    <input class="form-check-input" type="checkbox" @bind=@sortByAscending @oninput=@HandleSortByCheckboxOnChange id="ascendingcheck">
+                    <label class="form-check-label" for="ascendingcheck">
+                        Ascending
+                    </label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" @bind=@showFavourites @oninput=@HandleFilterCheckboxOnChange id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Show Favourites
+                    </label>
+                </div>
+
             </div>
         </div>
 
@@ -45,12 +48,14 @@
             @foreach (var account in filteredAccounts)
             {
                 <div class="col-md-4">
-                    <AccountCard Account="account"></AccountCard>
+                    <AccountCard Account="account" FilterAccountsByIsFavouriteCallback="@FilterAccountsByIsFavourite"></AccountCard>
                 </div>
             }
         }
     </div>
 </div>
+
+<MextButton Title = "Click Me!" OnClickCallback="SayHi" />
 
 @code {
     List<Account> accounts = null;
@@ -61,6 +66,7 @@
     // Asceding = Artan / Descending = Azalan
     // A'dan Z'ye - 0'dan 100'e /  Z'den A'ya - 100'den 0'a
     private bool sortByAscending = true;
+    private AccountSortingType sortingType = AccountSortingType.Title;
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,7 +82,8 @@
                 IsShown = false,
                 Title = "Yazilim Academy",
                 Url = "https://www.youtube.com",
-                IsFavourite = true
+                IsFavourite = true,
+                CreatedOn = Convert.ToDateTime("2024-05-23T12:19:38+00:00")
             },
             new Account()
             {
@@ -86,7 +93,8 @@
                 IsShown = false,
                 Title = "Google",
                 Url = "https://www.google.com",
-                IsFavourite = false
+                IsFavourite = false,
+                CreatedOn = Convert.ToDateTime("2024-05-23T11:19:38+00:00")
             },
             new Account()
             {
@@ -96,7 +104,8 @@
                 IsShown = false,
                 Title = "Example",
                 Url = "https://www.example.com",
-                IsFavourite = true
+                IsFavourite = true,
+                CreatedOn = Convert.ToDateTime("2024-05-23T10:19:38+00:00")
             },
             new Account()
             {
@@ -106,7 +115,8 @@
                 IsShown = false,
                 Title = "Gmail",
                 Url = "https://www.gmail.com",
-                IsFavourite = false
+                IsFavourite = false,
+                CreatedOn = Convert.ToDateTime("2024-05-23T09:19:38+00:00")
             },
             new Account()
             {
@@ -116,7 +126,8 @@
                 IsShown = false,
                 Title = "Outlook",
                 Url = "https://www.outlook.com",
-                IsFavourite = true
+                IsFavourite = true,
+                CreatedOn = Convert.ToDateTime("2024-05-23T08:19:38+00:00")
             },
             new Account()
             {
@@ -126,7 +137,8 @@
                 IsShown = false,
                 Title = "Yahoo",
                 Url = "https://www.yahoo.com",
-                IsFavourite = false
+                IsFavourite = false,
+                CreatedOn = Convert.ToDateTime("2024-05-23T07:19:38+00:00")
             }
         };
 
@@ -144,11 +156,7 @@
 
         showFavourites = Convert.ToBoolean(args.Value);
 
-        if (showFavourites)
-            filteredAccounts = accounts.Where(a => a.IsFavourite).ToList();
-
-        else
-            filteredAccounts = new List<Account>(accounts);
+        FilterAccountsByIsFavourite();
 
          SortAccounts();
         
@@ -167,15 +175,89 @@
     private void SortAccounts()
     {
         if (sortByAscending)
-            filteredAccounts = filteredAccounts
-                .OrderBy(ac => ac.Title)
-                .ToList();
+        {
+            switch (sortingType)
+            {
+                case AccountSortingType.Title:
+                    filteredAccounts = filteredAccounts
+                        .OrderBy(ac => ac.Title)
+                        .ToList();
+                    break;
+
+                case AccountSortingType.IsFavourite:
+                    filteredAccounts = filteredAccounts
+                        .OrderBy(ac => ac.IsFavourite)
+                        .ToList();
+                    break;
+                
+                case AccountSortingType.CreatedOn:
+                    filteredAccounts = filteredAccounts
+                        .OrderBy(ac => ac.CreatedOn)
+                        .ToList();
+                    break;
+            }
+        }
         else
-            filteredAccounts = filteredAccounts
-                .OrderByDescending(ac => ac.Title)
-                .ToList();
+        {
+            switch (sortingType)
+            {
+                case AccountSortingType.Title:
+                    filteredAccounts = filteredAccounts
+                        .OrderByDescending(ac => ac.Title)
+                        .ToList();
+                    break;
+
+                case AccountSortingType.IsFavourite:
+                    filteredAccounts = filteredAccounts
+                        .OrderByDescending(ac => ac.IsFavourite)
+                        .ToList();
+                    break;
+
+                case AccountSortingType.CreatedOn:
+                    filteredAccounts = filteredAccounts
+                        .OrderByDescending(ac => ac.CreatedOn)
+                        .ToList();
+                    break;
+            }
+        }
+            
+    }
+
+    private void HandleSortingTypeOnChange(ChangeEventArgs args)
+    {
+        if (args == null)
+         return;
+
+        sortingType = Enum.Parse<AccountSortingType>(args.Value.ToString());
+
+        SortAccounts();
     }
 
 
+    private void HandleFavouriteClick(Account account)
+    {
+        // Listedeki index'i (sirayi) bul.
+        var selectedAccountIndex = accounts.FindIndex(ac => ac.Id == account.Id);
+
+        // Bu siradaki kaydi, yeni gelen kayitla yer degistir.
+        accounts[selectedAccountIndex].IsFavourite = account.IsFavourite;
+
+        FilterAccountsByIsFavourite();
+
+    }
+
+    private void FilterAccountsByIsFavourite()
+    {
+        if (showFavourites)
+            filteredAccounts = accounts.Where(a => a.IsFavourite).ToList();
+
+        else
+            filteredAccounts = new List<Account>(accounts);
+    }
+
+    private void SayHi()
+    {
+        Console.WriteLine("Butona tiklandi.");
+    }
     
 }
