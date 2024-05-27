@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.WasmClient",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.Domain", "MextFSBeginner.Domain\MextFSBeginner.Domain.csproj", "{BE84D6AB-8FAB-4E44-9817-56FECF6EEECC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.TheBasics", "MextFSBeginner.TheBasics\MextFSBeginner.TheBasics.csproj", "{DAEDD795-EE97-4972-854B-32B951329882}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BE84D6AB-8FAB-4E44-9817-56FECF6EEECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE84D6AB-8FAB-4E44-9817-56FECF6EEECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE84D6AB-8FAB-4E44-9817-56FECF6EEECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAEDD795-EE97-4972-854B-32B951329882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAEDD795-EE97-4972-854B-32B951329882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAEDD795-EE97-4972-854B-32B951329882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAEDD795-EE97-4972-854B-32B951329882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
