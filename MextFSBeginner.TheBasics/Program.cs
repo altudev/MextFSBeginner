@@ -12,7 +12,8 @@ List<Student> attendees = new List<Student>()
         LastName = "Tunga",
         Email = "alper.tunga@yazilim.academy",
         Gender = Gender.Male,
-        Lesson = LessonType.Math
+        Lesson = LessonType.Math,
+        Score = 49
     },
     new Student()
     {
@@ -22,6 +23,7 @@ List<Student> attendees = new List<Student>()
         Email = "queen.elizabet@hotmail.com",
         Gender = Gender.Female,
         Lesson = LessonType.History,
+        Score = 100,
     },
     new Student()
     {
@@ -31,6 +33,7 @@ List<Student> attendees = new List<Student>()
         Email = "ayse.kaya@gmail.com",
         Gender = Gender.Female,
         Lesson = LessonType.Literature,
+        Score = 74
     },
     new Student()
     {
@@ -39,7 +42,8 @@ List<Student> attendees = new List<Student>()
         LastName = "Pitt",
         Email = "brad.pitt@outlook.com",
         Gender = Gender.Male,
-        Lesson = LessonType.Geography
+        Lesson = LessonType.Geography,
+        Score = 32
     }
 };
 
@@ -60,20 +64,39 @@ List<Student> attendees = new List<Student>()
 //     Console.WriteLine(attendee.Email);
 // }
 
-foreach (Student student in attendees)
+// foreach (Student student in attendees)
+// {
+//     string genderTurkish = "";
+//     
+//     if (student.Gender == Gender.Female)
+//     {
+//         genderTurkish = "Kadin";
+//     }
+//     else
+//     {
+//         genderTurkish = "Erkek";
+//     }
+//     
+//     Console.WriteLine($"{student.FirstName} {student.LastName} - {genderTurkish}");
+// }
+
+int score = 0;
+
+bool continueChecking = true;
+
+string userName = "";
+bool isUserNameSet = false;
+
+while (isUserNameSet == false)
 {
-    string genderTurkish = "";
-    
-    if (student.Gender == Gender.Female)
-    {
-        genderTurkish = "Kadin";
-    }
-    else
-    {
-        genderTurkish = "Erkek";
-    }
-    
-    Console.WriteLine($"{student.FirstName} {student.LastName} - {genderTurkish}");
+   Console.WriteLine("Kullanici adi giriniz:");
+   userName = Console.ReadLine();
+
+   if (!string.IsNullOrEmpty(userName))
+   {
+       isUserNameSet = true;
+       break;
+   }
 }
 
 
