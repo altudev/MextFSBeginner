@@ -1,3 +1,5 @@
+using MextFSBeginner.Domain.Enums;
+
 namespace MextFSBeginner.Domain.Entities;
 
 public class Student
@@ -6,4 +8,6 @@ public class Student
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
+    public Gender  Gender { get; set; }
+    public LessonType Lesson { get; set; }
 }
