@@ -10,5 +10,7 @@ public class Student
     public string Email { get; set; }
     public Gender  Gender { get; set; }
     public LessonType Lesson { get; set; }
+    
+    public List<LessonType> Lessons { get; set; }
     public int Score { get; set; }
 }

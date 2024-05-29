@@ -13,7 +13,13 @@ List<Student> attendees = new List<Student>()
         Email = "alper.tunga@yazilim.academy",
         Gender = Gender.Male,
         Lesson = LessonType.Math,
-        Score = 49
+        Score = 49,
+        Lessons = new List<LessonType>()
+        {
+            LessonType.Math,
+            LessonType.Science,
+            LessonType.History
+        }
     },
     new Student()
     {
@@ -24,6 +30,11 @@ List<Student> attendees = new List<Student>()
         Gender = Gender.Female,
         Lesson = LessonType.History,
         Score = 100,
+        Lessons = new List<LessonType>()
+        {
+            LessonType.History,
+            LessonType.Literature
+        }
     },
     new Student()
     {
@@ -32,8 +43,15 @@ List<Student> attendees = new List<Student>()
         LastName = "Kaya",
         Email = "ayse.kaya@gmail.com",
         Gender = Gender.Female,
-        Lesson = LessonType.Literature,
-        Score = 74
+        Lesson = LessonType.Math,
+        Score = 74,
+        Lessons = new List<LessonType>()
+        {
+            LessonType.Literature,
+            LessonType.Geography,
+            LessonType.Science,
+            LessonType.Math
+        }
     },
     new Student()
     {
@@ -43,7 +61,12 @@ List<Student> attendees = new List<Student>()
         Email = "brad.pitt@outlook.com",
         Gender = Gender.Male,
         Lesson = LessonType.Geography,
-        Score = 32
+        Score = 32,
+        Lessons = new List<LessonType>()
+        {
+            LessonType.Geography,
+            LessonType.Math
+        }
     }
 };
 
@@ -80,24 +103,43 @@ List<Student> attendees = new List<Student>()
 //     Console.WriteLine($"{student.FirstName} {student.LastName} - {genderTurkish}");
 // }
 
-int score = 0;
+// int score = 0;
+//
+// bool continueChecking = true;
+//
+// string userName = "";
+// bool isUserNameSet = false;
+//
+// while (isUserNameSet == false)
+// {
+//    Console.WriteLine("Kullanici adi giriniz:");
+//    userName = Console.ReadLine();
+//
+//    if (!string.IsNullOrEmpty(userName))
+//    {
+//        isUserNameSet = true;
+//        break;
+//    }
+// }
 
-bool continueChecking = true;
+// Ogrenci: Alper Tunga - Favori Dersi: Math
+// Aldigi dersler sunlardir: Math, Science, History
+// --------------------------------------------
+// Ogrenci: Brad Pitt - Favori Dersi: Geography
+// Aldigi dersler sunlardir: Math, Science, Geography
 
-string userName = "";
-bool isUserNameSet = false;
-
-while (isUserNameSet == false)
+foreach (var student in attendees)
 {
-   Console.WriteLine("Kullanici adi giriniz:");
-   userName = Console.ReadLine();
-
-   if (!string.IsNullOrEmpty(userName))
-   {
-       isUserNameSet = true;
-       break;
-   }
+    Console.WriteLine($"Ogrenci: {student.FirstName} {student.LastName} - Favori Dersi: {student.Lesson}");
+    
+    string allLessons = "";
+    
+    foreach (var lessonType in student.Lessons)
+    {
+        allLessons += $" {lessonType},";
+    }
+    
+    Console.WriteLine($"Aldigi dersler sunlardir: {allLessons}");
 }
-
 
 Console.ReadKey();
