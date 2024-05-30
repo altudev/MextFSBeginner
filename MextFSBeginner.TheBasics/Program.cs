@@ -70,21 +70,84 @@ List<Student> attendees = new List<Student>()
     }
 };
 
-// Ogrenci: Alper Tunga - Favori Dersi: Math
-// Aldigi dersler sunlardir: Math, Science, History
+Console.WriteLine("Lutfen bir renk numarasi seciniz.");
 
-foreach (var student in attendees)
+var colourChoice = Enum.Parse<Colour>(Console.ReadLine());
+
+switch (colourChoice)
 {
-    Console.WriteLine($"Ogrenci: {student.FirstName} {student.LastName} - Favori Dersi: {student.Lesson}");
-
-    string allLessons = "";
+    case Colour.Kirmizi:
+        Console.BackgroundColor = ConsoleColor.Red;
+        break;
     
-    foreach (var lesson in student.Lessons)
-    {
-        allLessons += $" {lesson},";    
-    }
+    case Colour.Mavi:
+        Console.BackgroundColor = ConsoleColor.Blue;
+        break;
     
-    Console.WriteLine($"Aldigi dersler sunlardir: {allLessons}");
+    case Colour.Sari:
+        Console.BackgroundColor = ConsoleColor.Yellow;
+        break;
+    
+    case Colour.Turuncu:
+        Console.BackgroundColor = ConsoleColor.Magenta;
+        break;
+    
+    case Colour.Yesil:
+        Console.BackgroundColor = ConsoleColor.Green;
+        break;
+    
+    case Colour.Siyah:
+        Console.BackgroundColor = ConsoleColor.Black;
+        break;
+    
+    case Colour.Beyaz:
+        Console.BackgroundColor = ConsoleColor.White;
+        break;
 }
+
+Console.Clear();
+
+if (colourChoice == Colour.Beyaz)
+{
+    Console.ForegroundColor = ConsoleColor.Black;
+}
+else
+{
+    Console.ForegroundColor = ConsoleColor.White;
+}
+
+Console.WriteLine("Renk seciminiz basarili.");
+
+// if (colourChoice == Colour.Kirmizi)
+// {
+//     
+// }else if (colourChoice == Colour.Mavi)
+// {
+//     
+// }
+// else if (colourChoice == Colour.Sari)
+// {
+//     
+// }== 
+// else if (colourChoice Colour.Turuncu)
+// {
+//     
+// }
+// else if (colourChoice == Colour.Yesil)
+// {
+//     
+// }
+// else if (colourChoice == Colour.Siyah)
+// {
+//     
+// }
+// else if (colourChoice == Colour.Beyaz)
+// {
+//     
+// }
+// else
+// {
+//     Console.WriteLine("Gecersiz renk numarasi girdiniz.");
+// }
 
 Console.ReadKey();
