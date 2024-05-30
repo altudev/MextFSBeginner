@@ -70,73 +70,18 @@ List<Student> attendees = new List<Student>()
     }
 };
 
-// for (int i = attendees.Count - 1; i >= 0; i--)
-// {
-//     string fullName = $"{attendees[i].FirstName} {attendees[i].LastName}";
-//
-//     if (i % 2 == 0)
-//     {
-//         Console.WriteLine("----------------");
-//     }
-//     
-//     Console.WriteLine(fullName);
-// }
-//
-// foreach (Student attendee in attendees)
-// {
-//     Console.WriteLine(attendee.Email);
-// }
-
-// foreach (Student student in attendees)
-// {
-//     string genderTurkish = "";
-//     
-//     if (student.Gender == Gender.Female)
-//     {
-//         genderTurkish = "Kadin";
-//     }
-//     else
-//     {
-//         genderTurkish = "Erkek";
-//     }
-//     
-//     Console.WriteLine($"{student.FirstName} {student.LastName} - {genderTurkish}");
-// }
-
-// int score = 0;
-//
-// bool continueChecking = true;
-//
-// string userName = "";
-// bool isUserNameSet = false;
-//
-// while (isUserNameSet == false)
-// {
-//    Console.WriteLine("Kullanici adi giriniz:");
-//    userName = Console.ReadLine();
-//
-//    if (!string.IsNullOrEmpty(userName))
-//    {
-//        isUserNameSet = true;
-//        break;
-//    }
-// }
-
 // Ogrenci: Alper Tunga - Favori Dersi: Math
 // Aldigi dersler sunlardir: Math, Science, History
-// --------------------------------------------
-// Ogrenci: Brad Pitt - Favori Dersi: Geography
-// Aldigi dersler sunlardir: Math, Science, Geography
 
 foreach (var student in attendees)
 {
     Console.WriteLine($"Ogrenci: {student.FirstName} {student.LastName} - Favori Dersi: {student.Lesson}");
-    
+
     string allLessons = "";
     
-    foreach (var lessonType in student.Lessons)
+    foreach (var lesson in student.Lessons)
     {
-        allLessons += $" {lessonType},";
+        allLessons += $" {lesson},";    
     }
     
     Console.WriteLine($"Aldigi dersler sunlardir: {allLessons}");
