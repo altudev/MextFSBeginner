@@ -3,6 +3,10 @@
 using MextFSBeginner.Domain.Entities;
 using MextFSBeginner.Domain.Enums;
 
+bool isOpen = false;
+
+DayOfWeek haftaninGunu = DayOfWeekDegeriniOku();
+
 List<Student> attendees = new List<Student>()
 {
     new Student()
@@ -70,6 +74,8 @@ List<Student> attendees = new List<Student>()
     }
 };
 
+
+
 Console.WriteLine("Lutfen bir renk numarasi seciniz.");
 
 var colourChoice = Enum.Parse<Colour>(Console.ReadLine());
@@ -117,6 +123,25 @@ else
 }
 
 Console.WriteLine("Renk seciminiz basarili.");
+
+DayOfWeek DayOfWeekDegeriniOku()
+{
+    Console.WriteLine("Lutfen bir gun secimi yapiniz.");
+    
+    Console.WriteLine("0 - Pazar");
+    Console.WriteLine("1 - Pazartesi");
+    Console.WriteLine("2 - Sali");
+    Console.WriteLine("3 - Carsamba");
+    Console.WriteLine("4 - Persembe");
+    Console.WriteLine("5 - Cuma");
+    Console.WriteLine("6 - Cumartesi");
+
+    var haftaninGunu = Enum.Parse<DayOfWeek>(Console.ReadLine());
+    
+    Console.WriteLine($"Secilen Haftanin Gunu: {haftaninGunu}");
+
+    return haftaninGunu;
+}
 
 // if (colourChoice == Colour.Kirmizi)
 // {
