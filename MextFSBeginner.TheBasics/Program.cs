@@ -1,178 +1,59 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+string fullName = GetFullName();
 
-using MextFSBeginner.Domain.Entities;
-using MextFSBeginner.Domain.Enums;
+Console.WriteLine($"Merhaba {fullName}, lutfen islem icin ilk sayiyi giriniz:");
 
-bool isOpen = false;
+decimal sayi1 = Convert.ToDecimal(Console.ReadLine());
 
-DayOfWeek haftaninGunu = DayOfWeekDegeriniOku();
+Console.WriteLine("Lutfen islem icin ikinci sayiyi giriniz:");
 
-List<Student> attendees = new List<Student>()
-{
-    new Student()
-    {
-        Id = 1,
-        FirstName = "Alper",
-        LastName = "Tunga",
-        Email = "alper.tunga@yazilim.academy",
-        Gender = Gender.Male,
-        Lesson = LessonType.Math,
-        Score = 49,
-        Lessons = new List<LessonType>()
-        {
-            LessonType.Math,
-            LessonType.Science,
-            LessonType.History
-        }
-    },
-    new Student()
-    {
-        Id = 2,
-        FirstName = "Queen",
-        LastName = "Elizabeth",
-        Email = "queen.elizabet@hotmail.com",
-        Gender = Gender.Female,
-        Lesson = LessonType.History,
-        Score = 100,
-        Lessons = new List<LessonType>()
-        {
-            LessonType.History,
-            LessonType.Literature
-        }
-    },
-    new Student()
-    {
-        Id = 3,
-        FirstName = "Ayşe",
-        LastName = "Kaya",
-        Email = "ayse.kaya@gmail.com",
-        Gender = Gender.Female,
-        Lesson = LessonType.Math,
-        Score = 74,
-        Lessons = new List<LessonType>()
-        {
-            LessonType.Literature,
-            LessonType.Geography,
-            LessonType.Science,
-            LessonType.Math
-        }
-    },
-    new Student()
-    {
-        Id = 4,
-        FirstName = "Brad",
-        LastName = "Pitt",
-        Email = "brad.pitt@outlook.com",
-        Gender = Gender.Male,
-        Lesson = LessonType.Geography,
-        Score = 32,
-        Lessons = new List<LessonType>()
-        {
-            LessonType.Geography,
-            LessonType.Math
-        }
-    }
-};
+decimal sayi2 = Convert.ToDecimal(Console.ReadLine());
 
+decimal toplam = Toplama(sayi1, sayi2,25,26,27,30,111,222,333,444);
 
-
-Console.WriteLine("Lutfen bir renk numarasi seciniz.");
-
-var colourChoice = Enum.Parse<Colour>(Console.ReadLine());
-
-switch (colourChoice)
-{
-    case Colour.Kirmizi:
-        Console.BackgroundColor = ConsoleColor.Red;
-        break;
-    
-    case Colour.Mavi:
-        Console.BackgroundColor = ConsoleColor.Blue;
-        break;
-    
-    case Colour.Sari:
-        Console.BackgroundColor = ConsoleColor.Yellow;
-        break;
-    
-    case Colour.Turuncu:
-        Console.BackgroundColor = ConsoleColor.Magenta;
-        break;
-    
-    case Colour.Yesil:
-        Console.BackgroundColor = ConsoleColor.Green;
-        break;
-    
-    case Colour.Siyah:
-        Console.BackgroundColor = ConsoleColor.Black;
-        break;
-    
-    case Colour.Beyaz:
-        Console.BackgroundColor = ConsoleColor.White;
-        break;
-}
-
-Console.Clear();
-
-if (colourChoice == Colour.Beyaz)
-{
-    Console.ForegroundColor = ConsoleColor.Black;
-}
-else
-{
-    Console.ForegroundColor = ConsoleColor.White;
-}
-
-Console.WriteLine("Renk seciminiz basarili.");
-
-DayOfWeek DayOfWeekDegeriniOku()
-{
-    Console.WriteLine("Lutfen bir gun secimi yapiniz.");
-    
-    Console.WriteLine("0 - Pazar");
-    Console.WriteLine("1 - Pazartesi");
-    Console.WriteLine("2 - Sali");
-    Console.WriteLine("3 - Carsamba");
-    Console.WriteLine("4 - Persembe");
-    Console.WriteLine("5 - Cuma");
-    Console.WriteLine("6 - Cumartesi");
-
-    var haftaninGunu = Enum.Parse<DayOfWeek>(Console.ReadLine());
-    
-    Console.WriteLine($"Secilen Haftanin Gunu: {haftaninGunu}");
-
-    return haftaninGunu;
-}
-
-// if (colourChoice == Colour.Kirmizi)
-// {
-//     
-// }else if (colourChoice == Colour.Mavi)
-// {
-//     
-// }
-// else if (colourChoice == Colour.Sari)
-// {
-//     
-// }== 
-// else if (colourChoice Colour.Turuncu)
-// {
-//     
-// }
-// else if (colourChoice == Colour.Yesil)
-// {
-//     
-// }
-// else if (colourChoice == Colour.Siyah)
-// {
-//     
-// }
-// else if (colourChoice == Colour.Beyaz)
-// {
-//     
-// }
-// else
-// {
-//     Console.WriteLine("Gecersiz renk numarasi girdiniz.");
-// }
+Console.WriteLine($"Toplam: {toplam}");
 
 Console.ReadKey();
+
+// Bir fiyat gelecek, kdv oranı 0.20 olacak ve kdv dahil fiyatı hesaplayacak
+
+decimal fiyat = 100;
+decimal kdvOrani = 0.20m;
+
+decimal kdvliFiyat = CalculateTax(fiyat, kdvOrani);
+
+decimal CalculateTax(decimal fiyat, decimal kdvOrani)
+{
+    decimal kdvMiktari = fiyat * kdvOrani;
+    
+    decimal kdvliFiyat = fiyat + kdvMiktari;
+
+    return kdvliFiyat;
+}
+
+decimal Toplama(params decimal[] sayilar)
+{
+    decimal toplam = 0;
+    
+    foreach (var sayi in sayilar)
+    {
+        toplam += sayi;
+    }
+    
+    return toplam;
+}
+
+string GetFullName()
+{
+    Console.WriteLine("Lutfen adinizi giriniz:");
+    string firstName = Console.ReadLine();
+
+    Console.WriteLine("Lutfen soyadinizi giriniz:");
+    string lastName = Console.ReadLine();
+
+    string fullName = $"{firstName} {lastName}";
+    
+    Console.WriteLine(fullName);
+
+    return fullName;
+}
