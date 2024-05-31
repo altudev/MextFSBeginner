@@ -1,4 +1,6 @@
 ﻿
+using MextFSBeginner.Domain.Responses;
+
 string fullName = GetFullName();
 
 Console.WriteLine($"Merhaba {fullName}, lutfen islem icin ilk sayiyi giriniz:");
@@ -20,15 +22,24 @@ Console.ReadKey();
 decimal fiyat = 100;
 decimal kdvOrani = 0.20m;
 
-decimal kdvliFiyat = CalculateTax(fiyat, kdvOrani);
+var response = CalculateTax(fiyat, kdvOrani);
 
-decimal CalculateTax(decimal fiyat, decimal kdvOrani)
+Console.WriteLine($"Kdvli Fiyat:{response.KdvliFiyat}, Kdv Miktari:{response.KdvMiktari}, KdvOrani:{response.KdvOrani}");
+
+CalculateTaxResponse CalculateTax(decimal fiyat, decimal kdvOrani)
 {
     decimal kdvMiktari = fiyat * kdvOrani;
     
     decimal kdvliFiyat = fiyat + kdvMiktari;
 
-    return kdvliFiyat;
+    var taxResponse = new CalculateTaxResponse()
+    {
+        KdvliFiyat = kdvliFiyat,
+        KdvMiktari = kdvMiktari,
+        KdvOrani = kdvOrani
+    };
+
+    return taxResponse;
 }
 
 decimal Toplama(params decimal[] sayilar)
