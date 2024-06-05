@@ -14,13 +14,7 @@ public class Student
     public int Score2 { get; set; }
     public int Score3 { get; set; }
 
-    public string FavouriteLessonTurkish
-    {
-        get
-        {
-            return 
-        }
-    }
+    public string FavouriteLessonTurkish { get; set; }
 
     public Student(int score1, int score2, int score3)
     {

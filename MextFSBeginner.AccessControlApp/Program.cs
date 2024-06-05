@@ -1,11 +1,38 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using MextFSBeginner.Domain.Entities;
+using MextFSBeginner.Domain.Enums;
 
-using MextFSBeginner.Domain.Entities;
+string filePath = "/Users/altudev/Desktop/AccessControlLogs.txt";
 
-Console.WriteLine("Hello, World!");
+string fileContent = File.ReadAllText(filePath);
 
-AccessControlLog accessControlLog = new AccessControlLog(25,"Alper","Tunga");
+string[] lines = fileContent.Split("\n", StringSplitOptions.RemoveEmptyEntries);
 
-Console.WriteLine($"{accessControlLog.FirstName} {accessControlLog.LastName}");
+var accessControlLogs = new List<AccessControlLog>();
 
-Console.WriteLine(accessControlLog.FullName);
+foreach (var line in lines)
+{
+    string[] properties = line.Split("---", StringSplitOptions.RemoveEmptyEntries);
+    
+    var accessControlLog = new AccessControlLog()
+    {
+        Id = Guid.NewGuid(),
+        UserId = Convert.ToInt32(properties[0]),
+        DeviceSerialNumber = properties[1],
+        AccessType = Enum.Parse<AccessType>(properties[2]),
+        Date = Convert.ToDateTime(properties[3])
+    };
+    
+    accessControlLogs.Add(accessControlLog);
+}
+
+foreach (var accessControlLog in accessControlLogs)
+{
+    Console.WriteLine($"Log Sistem ID'si: {accessControlLog.Id}, Kullanici ID'si: {accessControlLog.UserId}, Cihaz Seri Numarasi: {accessControlLog.DeviceSerialNumber}, Erisim Tipi: {accessControlLog.AccessType}, Tarih: {accessControlLog.Date}");
+}
+
+Console.ReadKey();
+
+var userValues = "Alper Tunga 28 Ogretmen";
+
+//
+
