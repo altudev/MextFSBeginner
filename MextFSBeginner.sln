@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.TheBasics", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.AccessControlApp", "MextFSBeginner.AccessControlApp\MextFSBeginner.AccessControlApp.csproj", "{39E7F314-BB60-413C-A907-BB6911979C91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.GptApp", "MextFSBeginner.GptApp\MextFSBeginner.GptApp.csproj", "{FCB9752A-C4DA-415D-B03E-AF50118F8737}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{39E7F314-BB60-413C-A907-BB6911979C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39E7F314-BB60-413C-A907-BB6911979C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39E7F314-BB60-413C-A907-BB6911979C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB9752A-C4DA-415D-B03E-AF50118F8737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB9752A-C4DA-415D-B03E-AF50118F8737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB9752A-C4DA-415D-B03E-AF50118F8737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB9752A-C4DA-415D-B03E-AF50118F8737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
