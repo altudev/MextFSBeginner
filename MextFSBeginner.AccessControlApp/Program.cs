@@ -1,44 +1,24 @@
-﻿using MextFSBeginner.AccessControlApp;
-using MextFSBeginner.Domain.Entities;
+﻿using MextFSBeginner.Domain.Entities;
 using MextFSBeginner.Domain.Enums;
 using MextFSBeginner.Domain.Services;
 
-var hesapMakinesi = new HesapMakinesi();
+//var hesapMakinesi = new HesapMakinesi();
 
-var toplam = hesapMakinesi.Topla(20, 50,true);
+//var toplam = hesapMakinesi.Topla(20, 50,true);
 
-// string filePath = "/Users/altudev/Desktop/AccessControlLogs.txt";
-//
-// string fileContent = File.ReadAllText(filePath);
-//
-// string[] lines = fileContent.Split("\n", StringSplitOptions.RemoveEmptyEntries);
-//
-// var accessControlLogs = new List<AccessControlLog>();
-//
-// foreach (var line in lines)
-// {
-//     string[] properties = line.Split("---", StringSplitOptions.RemoveEmptyEntries);
-//     
-//     var accessControlLog = new AccessControlLog()
-//     {
-//         Id = Guid.NewGuid(),
-//         UserId = Convert.ToInt32(properties[0]),
-//         DeviceSerialNumber = properties[1],
-//         AccessType = Enum.Parse<AccessType>(properties[2]),
-//         Date = Convert.ToDateTime(properties[3])
-//     };
-//     
-//     accessControlLogs.Add(accessControlLog);
-// }
-//
-// foreach (var accessControlLog in accessControlLogs)
-// {
-//     Console.WriteLine($"Log Sistem ID'si: {accessControlLog.Id}, Kullanici ID'si: {accessControlLog.UserId}, Cihaz Seri Numarasi: {accessControlLog.DeviceSerialNumber}, Erisim Tipi: {accessControlLog.AccessType}, Tarih: {accessControlLog.Date}");
-// }
-//
-// Console.ReadKey();
-//
-// var userValues = "Alper Tunga 28 Ogretmen";
 
-//
+var accessControlLogManager = new AccessControlLogManager();
+
+var accessControlLogs = accessControlLogManager.LoadFromFile();
+
+foreach (var accessControlLog in accessControlLogs)
+{
+    Console.WriteLine($"Log Sistem ID'si: {accessControlLog.Id}, Kullanici ID'si: {accessControlLog.UserId}, Cihaz Seri Numarasi: {accessControlLog.DeviceSerialNumber}, Erisim Tipi: {accessControlLog.AccessType}, Tarih: {accessControlLog.Date}");
+}
+
+Console.ReadKey();
+
+var userValues = "Alper Tunga 28 Ogretmen";
+
+
 
