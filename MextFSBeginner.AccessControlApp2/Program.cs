@@ -9,6 +9,7 @@ var accessControlLogManager = new AccessControlLogManager();
 
 var accessControlLogs = new List<AccessControlLog>();
 
+var errorLogManager = new ErrorLogManager();
 
 try
 {
@@ -18,11 +19,29 @@ catch (Exception ex)
 {
     Console.WriteLine("Uygulamada beklenmedik bir hata olustu. Lutfen tekrar deneyiniz.");
 
+     errorLogManager.Log(ex.Message);
+
+    // Bir tane ErrorLogManager olusturup, Log metodu ile hatalari loglayabiliriz.
+
     // ErrorLogManager.Log(ex.Message);
+
+    // filePath = "C:\\Users\\alper\\Desktop\\Hatalar.txt";
 
     // --------------------------------------------------
     // Uygulamada beklenmedik bir hata olustu. Lutfen tekrar deneyiniz.
-    // ex.Message
+    // Could not find file 'D:\NETRepos\MextFSBeginner\MextFSBeginner.AccessControlApp2\bin\Debug\net8.0\asdsaasdafa123142123'.
+    // --------------------------------------------------
+    // --------------------------------------------------
+    // Uygulamada beklenmedik bir hata olustu. Lutfen tekrar deneyiniz.
+    // Could not find file 'D:\NETRepos\MextFSBeginner\MextFSBeginner.AccessControlApp2\bin\Debug\net8.0\asdsaasdafa123142123'.
+    // --------------------------------------------------
+    // --------------------------------------------------
+    // Uygulamada beklenmedik bir hata olustu. Lutfen tekrar deneyiniz.
+    // Could not find file 'D:\NETRepos\MextFSBeginner\MextFSBeginner.AccessControlApp2\bin\Debug\net8.0\asdsaasdafa123142123'.
+    // --------------------------------------------------
+
+
+    //File.AppendAllText(filePath,"asdasdadsasd");
 
     Console.ReadKey();
 }
