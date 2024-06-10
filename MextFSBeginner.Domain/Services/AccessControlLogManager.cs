@@ -41,14 +41,18 @@ namespace MextFSBeginner.Domain.Services
                 lines.Add($"{seperator}{accessControlLog.UserId}{seperator}{accessControlLog.DeviceSerialNumber}{seperator}{accessControlLog.AccessType}{seperator}{accessControlLog.Date.ToString("yyyy-MM-ddTHH:mm:ssK")}");
             }
 
-            string stringLines = "";
+            var textContent = string.Join("\n", lines);
 
-            foreach (var accessControlLog in accessControlLogs)
-            {
-              stringLines += $"{seperator}{accessControlLog.UserId}{seperator}{accessControlLog.DeviceSerialNumber}{seperator}{accessControlLog.AccessType}{seperator}{accessControlLog.Date.ToString("yyyy-MM-ddTHH:mm:ssK")}\n";
-            }
+            File.WriteAllText(filePath, textContent);
 
-            File.WriteAllText(filePath, stringLines);
+            //string stringLines = "";
+
+            //foreach (var accessControlLog in accessControlLogs)
+            //{
+            //  stringLines += $"{seperator}{accessControlLog.UserId}{seperator}{accessControlLog.DeviceSerialNumber}{seperator}{accessControlLog.AccessType}{seperator}{accessControlLog.Date.ToString("yyyy-MM-ddTHH:mm:ssK")}\n";
+            //}
+
+            //File.WriteAllText(filePath, stringLines);
         }
     }
 }
