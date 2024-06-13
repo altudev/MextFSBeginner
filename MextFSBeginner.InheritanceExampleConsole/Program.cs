@@ -1,21 +1,13 @@
 ﻿
 using MextFSBeginner.Entities;
-using MextFSBeginner.Entities.BaseClasses;
 using MextFSBeginner.Entities.Enums;
+using MextFSBeginner.Entities.Helpers;
 
 var teacher = new Teacher()
 {
     FirstName = "Alper",
     LastName = "Tunga",
     IdentityNumber = "123456789052342345",
-};
-
-var student = new Student()
-{
-    FirstName = "Sena",
-    LastName = "Tasci",
-    No = 100,
-    IdentityNumber = "52367342567890"
 };
 
 var parent = new Parent()
@@ -25,13 +17,29 @@ var parent = new Parent()
     IdentityNumber = "1234567890",
 };
 
-var securtyEmployee = new Employee()
+var newParent = Parent.CreateParent(teacher);
+
+var student = new Student()
+{
+    FirstName = "Sena",
+    LastName = "Tasci",
+    No = 100,
+    IdentityNumber = "52367342567890"
+};
+
+
+
+teacher = parent;
+
+var securityEmployee = new Employee()
 {
     FirstName = "Mehmet",
     LastName = "Tasci",
     Type = EmployeeType.Security,
     IdentityNumber = "4658373534243"
 };
+
+securityEmployee.IdentityNumber = "!23145123";
 
 var cleanerEmployee = new Employee()
 {
@@ -42,40 +50,97 @@ var cleanerEmployee = new Employee()
 
 List<object> people = new List<object>();
 
-people.Add(teacher);
 
-people.Add(2.29d);
+people.Add(2.29d); // double
 
-people.Add(student);
+people.Add(21.39d); // double
 
-people.Add(125);
+people.Add(teacher); // Teacher
 
-people.Add(parent);
+people.Add(teacher); // Teacher
 
-people.Add(999.99M);
+people.Add(student); // Student
 
-people.Add(securtyEmployee);
+people.Add(student); // Student
 
-people.Add(cleanerEmployee);
 
-people.Add("rtsdfsdfklnsdfsdfsfd");
+people.Add(teacher); // Teacher
+
+people.Add(teacher); // Teacher
+
+people.Add(2.29d); // double
+
+people.Add(student); // Student
+
+people.Add(9399.559M); // decimal
+
+people.Add(125); // int32
+
+
+people.Add(parent); // parent
+
+people.Add(teacher); // Teacher
+
+people.Add(305); // int32
+
+people.Add(999.9999M); // decimal
+
+people.Add(securityEmployee); // Employee
+
+people.Add(7255125); // int32
+
+people.Add(cleanerEmployee); // Employee
+
+people.Add("rtsdfsdfklnsdfsdfsfd"); // string
 
 
 Console.WriteLine("Balo Katilimcilari Listesi:");
 
+var teacherCount = 0;
+var studentCount = 0;
+
+double price =500;
+
+double taxAmount = TaxCalculator.CalculateTax(price);
+
+double taxedPrice = price + taxAmount;
+
+Console.WriteLine(Messages.WelcomeMessage);
+
+Console.WriteLine($"Vergisiz Fiyat={price}, Vergi Miktari={taxAmount}, Son Fiyat={taxedPrice}");
+
+Console.WriteLine(Messages.GoodbyeMessage);
+
+
+
 foreach (var person in people)
 {
-    if (person is PersonBase)
-    {
-        var personBase = person as PersonBase;
+    if (person is Teacher)
+        teacherCount++;
 
-        Console.WriteLine(personBase.FullInfo);
-    }
-    else
+    if (person is Student)
+        studentCount++;
+
+    if (person is Employee)
     {
-        Console.WriteLine("Gelen deger gecerli degil. Baloya katilim saglanmayacaktir.");
+        var employee = person as Employee;
     }
+
+    if(person is double)
+    {
+        var doubleValue = (double)person;
+    }
+
 }
+
+Console.WriteLine(teacherCount);
+
+// Teacher => 4 tane bulundu.
+// double => 3 tane bulundu.
+// int => 7 tane bulundu.
+// Empoyee => 2 tane bulundu.
+// string => 1 tane bulundu.
+
 
 Console.ReadLine();
 

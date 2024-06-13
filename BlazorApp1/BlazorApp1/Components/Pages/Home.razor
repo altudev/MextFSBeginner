@@ -1,0 +1,18 @@
+﻿@page "/"
+@using MextFSBeginner.Entities.Helpers
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<h3 class="text-warning">@Messages.GetWelcomeMessage(LanguageCodes.Turkish)</h3>
+<h3 class="text-warning">@Messages.GetWelcomeMessage(LanguageCodes.English)</h3>
+<h3 class="text-warning">@Messages.GetWelcomeMessage(LanguageCodes.German)</h3>
+<h3 class="text-warning">@TaxCalculator.CalculateTax(500)</h3>
+
+@code
+{
+   
+}

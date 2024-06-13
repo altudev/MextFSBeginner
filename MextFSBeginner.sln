@@ -21,9 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6E2734AF-BA9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "beginner", "beginner", "{938241E4-2809-4E9C-B404-F3D88F632F8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.Entities", "MextFSBeginner.Entities\MextFSBeginner.Entities.csproj", "{8612F934-267F-4E0E-ACCB-9CDC75F1EC4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.Entities", "MextFSBeginner.Entities\MextFSBeginner.Entities.csproj", "{8612F934-267F-4E0E-ACCB-9CDC75F1EC4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.InheritanceExampleConsole", "MextFSBeginner.InheritanceExampleConsole\MextFSBeginner.InheritanceExampleConsole.csproj", "{08365224-27F5-4216-B97E-1644C030A924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.InheritanceExampleConsole", "MextFSBeginner.InheritanceExampleConsole\MextFSBeginner.InheritanceExampleConsole.csproj", "{08365224-27F5-4216-B97E-1644C030A924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "BlazorApp1\BlazorApp1\BlazorApp1.csproj", "{FECF31D4-72BE-4A64-8DD0-4211D52D2B2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1.Client", "BlazorApp1\BlazorApp1.Client\BlazorApp1.Client.csproj", "{5C7AF516-69E4-4E61-AE26-82488F35AA0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +71,14 @@ Global
 		{08365224-27F5-4216-B97E-1644C030A924}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08365224-27F5-4216-B97E-1644C030A924}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08365224-27F5-4216-B97E-1644C030A924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FECF31D4-72BE-4A64-8DD0-4211D52D2B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FECF31D4-72BE-4A64-8DD0-4211D52D2B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FECF31D4-72BE-4A64-8DD0-4211D52D2B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FECF31D4-72BE-4A64-8DD0-4211D52D2B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7AF516-69E4-4E61-AE26-82488F35AA0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7AF516-69E4-4E61-AE26-82488F35AA0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7AF516-69E4-4E61-AE26-82488F35AA0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7AF516-69E4-4E61-AE26-82488F35AA0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +93,8 @@ Global
 		{E68CBCE4-359A-473C-8CC0-619F9B8B5478} = {6E2734AF-BA93-40E0-9FA7-78E31CA9E3F0}
 		{8612F934-267F-4E0E-ACCB-9CDC75F1EC4E} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 		{08365224-27F5-4216-B97E-1644C030A924} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
+		{FECF31D4-72BE-4A64-8DD0-4211D52D2B2B} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
+		{5C7AF516-69E4-4E61-AE26-82488F35AA0D} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B238CC29-1BC7-46E6-B86C-C5BC8C0DE784}
