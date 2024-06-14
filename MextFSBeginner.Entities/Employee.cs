@@ -7,5 +7,6 @@ namespace MextFSBeginner.Entities
     {
         public EmployeeType Type { get; set; }
         public string Email { get; set; }
+        public override string FullInfo => $"Calisan => {FullName} - {IdentityNumber}";
     }
 }

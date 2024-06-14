@@ -13,5 +13,7 @@ namespace MextFSBeginner.Entities
                 IdentityNumber = teacher.IdentityNumber
             };
         }
+
+        public override string FullInfo => $"Veli => {FullName} - {IdentityNumber}";
     }
 }

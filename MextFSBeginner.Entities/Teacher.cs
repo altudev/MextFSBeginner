@@ -18,5 +18,7 @@ namespace MextFSBeginner.Entities
                IdentityNumber = parent.IdentityNumber
            };
         }
+
+        public override string FullInfo => $"Ogretmen => {FullName} - {IdentityNumber}";
     }
 }

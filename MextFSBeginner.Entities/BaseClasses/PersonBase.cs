@@ -1,12 +1,12 @@
 ﻿namespace MextFSBeginner.Entities.BaseClasses
 {
-    public class PersonBase
+    public abstract class PersonBase
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string IdentityNumber { get; set; }
 
-        public string FullName
+        public virtual string FullName
         {
             get
             {
@@ -14,6 +14,6 @@
             }
         }
 
-        public string FullInfo => $"{FullName} - {IdentityNumber}";
+        public abstract string FullInfo { get; }
     }
 }
