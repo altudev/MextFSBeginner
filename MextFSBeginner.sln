@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.AbstractClas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.AbstractClassExamples", "MextFSBeginner.AbstractClassExamples\MextFSBeginner.AbstractClassExamples.csproj", "{BAB6073B-D08C-4B6C-8A13-882CD655F85A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteExamples", "SQLiteExamples\SQLiteExamples.csproj", "{5B89B307-7878-4ED1-831C-3B2CB14610A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{BAB6073B-D08C-4B6C-8A13-882CD655F85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB6073B-D08C-4B6C-8A13-882CD655F85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB6073B-D08C-4B6C-8A13-882CD655F85A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{5C7AF516-69E4-4E61-AE26-82488F35AA0D} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 		{02269F89-7900-4BD3-BEB6-5961770102AF} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 		{BAB6073B-D08C-4B6C-8A13-882CD655F85A} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
+		{5B89B307-7878-4ED1-831C-3B2CB14610A0} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B238CC29-1BC7-46E6-B86C-C5BC8C0DE784}
