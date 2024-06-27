@@ -13,6 +13,7 @@ public class ProductsController : ControllerBase
     private readonly ApplicationDbContext _dbContext;
     private readonly MyUrlService _myUrlService;
     private readonly RequestCounterService _requestCounterService;
+    private static List<Product> _products = new List<Product>();
 
     public ProductsController(ApplicationDbContext dbContext, MyUrlService myUrlService, RequestCounterService requestCounterService)
     {
@@ -21,6 +22,8 @@ public class ProductsController : ControllerBase
         _requestCounterService = requestCounterService;
 
         _dbContext.Database.EnsureCreated();
+
+        _products = _dbContext.Products.ToList();
     }
     
     [HttpPut("{id}")]
@@ -97,11 +100,70 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        var url = _myUrlService.Url;
+        // LINQ
         var products = _dbContext
             .Products
             .AsNoTracking()
-            .Where(x=>x.Price>=100)
+            .ToList();
+        
+        _requestCounterService.Increment();
+        
+        return Ok(products);
+    }
+    
+    [HttpGet("OrderByExample")]
+    public IActionResult OrderByExample(bool isAscending)
+    {
+        // LINQ
+        List<Product> products = _dbContext
+            .Products
+            .AsNoTracking()
+            .ToList();
+
+        if (isAscending)
+        {
+            products = products
+                .OrderBy(p => p.Name,StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+        else
+        {
+            products = products
+                .OrderByDescending(p => p.Name,StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+        
+        _requestCounterService.Increment();
+        
+        return Ok(products);
+    }
+    
+    [HttpGet("WhereOnPrice")]
+    public IActionResult WhereOnPrice(decimal lowestPrice,decimal highestPrice)
+    {
+        // LINQ
+        List<Product> products = _dbContext
+            .Products
+            .AsNoTracking()
+            .Where(p => p.Price >= lowestPrice && p.Price <= highestPrice)
+            .ToList();
+        
+        _requestCounterService.Increment();
+        
+        return Ok(products);
+    }
+    
+    [HttpGet("SearchExampleWithContaints")]
+    public IActionResult SearchExampleWithContaints(string searchParam)
+    {
+        // LINQ
+        List<Product> products = _dbContext
+            .Products
+            .AsNoTracking()
+            .ToList();
+
+        products = products
+            .Where(p => p.Name.ToLowerInvariant().Contains(searchParam.ToLowerInvariant()))
             .ToList();
         
         _requestCounterService.Increment();
