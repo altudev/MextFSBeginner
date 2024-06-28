@@ -83,6 +83,35 @@ public class ProductsController : ControllerBase
         return Ok("Urun basariyla silindi.");
     }
     
+    [HttpPost("DeleteRange")]
+    public IActionResult DeleteRange(List<string> ids)
+    {
+        // // LINQ
+        // var products = _dbContext
+        //     .Products
+        //     .Where(x => ids.Contains(x.Id))
+        //     .ToList();
+        
+        List<Product> products = new List<Product>();
+
+        foreach (var id in ids)
+        {
+            var product = _dbContext
+                .Products
+                .FirstOrDefault(x => x.Id == id);
+            
+            products.Add(product);
+        }
+        
+        _dbContext.Products.RemoveRange(products);
+        
+        _dbContext.SaveChanges();
+        
+        _requestCounterService.Increment();
+        
+        return Ok("Urunler basariyla silindi.");
+    }
+    
     
     [HttpPost]
     public IActionResult Create(Product product)
@@ -95,6 +124,18 @@ public class ProductsController : ControllerBase
         _requestCounterService.Increment();
         
         return Ok("Urun basariyla eklendi.");
+    }
+    
+    [HttpPost("CreateRange")]
+    public IActionResult CreateRange(List<Product> products)
+    {
+        _dbContext.Products.AddRange(products);
+        
+        _dbContext.SaveChanges();
+        
+        _requestCounterService.Increment();
+        
+        return Ok("Urunler basariyla eklendi.");
     }
     
     [HttpGet]
