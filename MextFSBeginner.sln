@@ -31,9 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Client", "Blazor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.AbstractClasses", "MextFSBeginner.AbstractClasses\MextFSBeginner.AbstractClasses.csproj", "{02269F89-7900-4BD3-BEB6-5961770102AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MextFSBeginner.AbstractClassExamples", "MextFSBeginner.AbstractClassExamples\MextFSBeginner.AbstractClassExamples.csproj", "{BAB6073B-D08C-4B6C-8A13-882CD655F85A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MextFSBeginner.AbstractClassExamples", "MextFSBeginner.AbstractClassExamples\MextFSBeginner.AbstractClassExamples.csproj", "{BAB6073B-D08C-4B6C-8A13-882CD655F85A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteExamples", "SQLiteExamples\SQLiteExamples.csproj", "{5B89B307-7878-4ED1-831C-3B2CB14610A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLiteExamples", "SQLiteExamples\SQLiteExamples.csproj", "{5B89B307-7878-4ED1-831C-3B2CB14610A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "databases", "databases", "{3ABFBEC2-51B8-4B75-955C-2642C7937239}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp", "ECommerceApp\ECommerceApp.csproj", "{A8DBBBCC-85F5-475B-AAA0-9F3913B7DB0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,10 @@ Global
 		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B89B307-7878-4ED1-831C-3B2CB14610A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8DBBBCC-85F5-475B-AAA0-9F3913B7DB0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8DBBBCC-85F5-475B-AAA0-9F3913B7DB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8DBBBCC-85F5-475B-AAA0-9F3913B7DB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8DBBBCC-85F5-475B-AAA0-9F3913B7DB0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +124,7 @@ Global
 		{02269F89-7900-4BD3-BEB6-5961770102AF} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 		{BAB6073B-D08C-4B6C-8A13-882CD655F85A} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
 		{5B89B307-7878-4ED1-831C-3B2CB14610A0} = {938241E4-2809-4E9C-B404-F3D88F632F8F}
+		{A8DBBBCC-85F5-475B-AAA0-9F3913B7DB0C} = {3ABFBEC2-51B8-4B75-955C-2642C7937239}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B238CC29-1BC7-46E6-B86C-C5BC8C0DE784}
